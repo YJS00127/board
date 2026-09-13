@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>게시글 수정</title>
+</head>
+<body>
+    <form role="form" th:object="${boardDTO}"
+          th:action="@{/board/update}" method="post">
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title"
+                   th:value="${boardDetail.title}">
+        </div>
+        <div>
+            <label for="writer">작성자</label>
+            <input type="text" id="writer" name="writer"
+                   th:value="${boardDetail.writer}">
+        </div>
+        <div>
+            <label for="content">내용</label>
+            <input type="text" id="content" name="content"
+                   th:value="${boardDetail.content}">
+        </div>
+        <div style="float: right">
+            <input type="hidden" name="id" th:value="${boardDetail.id}">
+            <input type="submit" th:value="저장">
+            <input type="submit" th:value="삭제"
+            th:formaction="@{/board/delete/{id}(id=${boardDetail.id})}">
+        </div>
+    </form>
+</body>
+</html>

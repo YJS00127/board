@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: Board
+
+  datasource:
+    url: jdbc:h2:file:./data/boarddb
+    driver-class-name: org.h2.Driver
+    username: js
+    password:
+
+  h2:
+    console:
+      enabled: true
+
+  sql:
+    init:
+      mode: always
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.example.board.dto
+  configuration:
+     map-underscore-to-camel-case: true

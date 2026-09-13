@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 목록</title>
+</head>
+<body>
+    <div>
+        <h1>게시판 목록</h1>
+    </div>
+    <button style= "float:right;"  onclick="location.href='/board/insert'">등록</button>
+    <div th:if="${#lists.isEmpty(boardList)}">
+        <h2>등록된 게시글이 없습니다.</h2>
+    </div>
+        <table th:if="${!#lists.isEmpty(boardList)}">
+            <thead>
+            <tr>
+                <th>순서</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="data : ${boardList}"
+                th:onclick="|window.location.href='@{/board/detail/{id}(id=${data.id})}'|">
+                <td th:text="${data.id}"></td>
+                <td th:text="${data.title}"></td>
+                <td th:text="${data.writer}"></td>
+                <td th:text="${#temporals.format(data.createdAt, 'yyyy.MM.dd')}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상세 게시글</title>
+</head>
+<body>
+    <h1>상세 게시글</h1>
+    <button style= "float:right;"  onclick="location.href='/board/list'">목록</button>
+    <div>
+<form>
+    <div>
+        <h3>제목</h3>
+        <p th:text="${boardDetail.title}"></p>
+    </div>
+    <div>
+        <h3>내용</h3>
+        <p th:text="${boardDetail.content}"></p>
+    </div>
+    <div>
+        <h3>작성자</h3>
+        <p th:text="${boardDetail.writer}"></p>
+    </div>
+    <div>
+        <h3>작성일자</h3>
+        <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd')}"></p>
+    </div>
+
+    <div style="float: right">
+        <input type="submit" th:value="수정"
+               th:formaction="@{/board/update/{id}(id=${boardDetail.id})}">
+        <input type="submit" th:value="삭제"
+               th:formaction="@{/board/delete/{id}(id=${boardDetail.id})}">
+    </div>
+</form>
+</body>
+</html>
