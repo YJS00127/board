@@ -19,6 +19,9 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
+    public List<BoardDTO> findBoardByTitle(String keyword) { return boardMapper.findBoardByTitle(keyword);}
+
+    @Override
     public BoardDTO findBoardById(Long id){
         return boardMapper.findBoardById(id);
     }

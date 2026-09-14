@@ -26,6 +26,14 @@ public class BoardController {
         return "list";
     }
 
+    @GetMapping("/search")
+    private String boardSearch(@ModelAttribute BoardDTO board, Model model, String keyword){
+        List<BoardDTO> boardList = new ArrayList<>();
+        boardList = boardService.findBoardByTitle(keyword);
+        model.addAttribute("boardList", boardList);
+        return "list";
+    }
+
     @GetMapping("/detail/{id}")
     private String boardDetail(@PathVariable Long id, Model model){
         model.addAttribute("boardDetail", boardService.findBoardById(id));

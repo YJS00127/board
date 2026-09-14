@@ -6,34 +6,37 @@
 </head>
 <body>
     <h1>게시판 목록</h1>
-    <button style= "float:right;"  onclick="location.href='/board/insert'">등록</button>
+    <div style="float: right;">
+        <button onclick="location.href='/board/insert'">등록</button>
+        <button onclick="location.href='/board/list'">목록</button>
+    </div>
     <div th:if="${#lists.isEmpty(boardList)}">
         <h2>등록된 게시글이 없습니다.</h2>
     </div>
-<!--    <form th:formaction="@{/board/search}" method="get">-->
-
+    <form th:action="@{/board/search}" method="get">
+        <input type="text" id="keyword" name="keyword" placeholder="제목을 검색하세요.">
+        <button type="submit">검색</button>
     </form>
-        <input type="text" placeholder="제목을 검색하세요.">
-    </div>
-        <table th:if="${!#lists.isEmpty(boardList)}">
-            <thead>
-            <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-            </tr>
-            </thead>
+    <br>
+    <table th:if="${!#lists.isEmpty(boardList)}">
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>작성일</th>
+        </tr>
+        </thead>
 
-            <tbody>
-            <tr th:each="boardData:${boardList}"
-                th:onclick="|window.location.href='@{/board/detail/{id}(id=${boardData.id})}'|">
-                <td th:text="${boardData.id}"></td>
-                <td th:text="${boardData.title}"></td>
-                <td th:text="${boardData.writer}"></td>
-                <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
-            </tr>
-            </tbody>
-        </table>
+        <tbody>
+        <tr th:each="boardData:${boardList}"
+            th:onclick="|window.location.href='@{/board/detail/{id}(id=${boardData.id})}'|">
+            <td th:text="${boardData.id}"></td>
+            <td th:text="${boardData.title}"></td>
+            <td th:text="${boardData.writer}"></td>
+            <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>

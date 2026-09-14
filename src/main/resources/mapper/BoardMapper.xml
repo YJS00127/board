@@ -7,6 +7,11 @@
         SELECT id, title, writer, created_at
         FROM board
     </select>
+    <select id="findBoardByTitle" parameterType="string" resultType="BoardDTO">
+        SELECT id, title, writer, created_at
+        FROM board
+        WHERE title LIKE CONCAT('%', #{keyword}, '%');
+    </select>
     <select id="findBoardById" resultType="BoardDTO">
         SELECT id, title, content, writer, created_at
         FROM board
@@ -28,8 +33,5 @@
         DELETE FROM board
         WHERE id= #{id} AND pw= #{pw}
     </delete>
-<!--    <select id="findBoardByTitle" resultType="BoardDTO">-->
-<!--        -->
-<!--    </select>-->
 
 </mapper>
