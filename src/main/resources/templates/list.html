@@ -7,16 +7,15 @@
 <body>
     <h1>게시판 목록</h1>
     <div style="float: right;">
-        <button onclick="location.href='/board/insert'">등록</button>
         <button onclick="location.href='/board/list'">목록</button>
     </div>
+    <form th:action="@{/board/search}" method="get">
+        <input type="text" id="keyword" name="keyword" placeholder="제목을 검색하세요">
+        <button type="submit">검색</button>
+    </form>
     <div th:if="${#lists.isEmpty(boardList)}">
         <h2>등록된 게시글이 없습니다.</h2>
     </div>
-    <form th:action="@{/board/search}" method="get">
-        <input type="text" id="keyword" name="keyword" placeholder="제목을 검색하세요.">
-        <button type="submit">검색</button>
-    </form>
     <br>
     <table th:if="${!#lists.isEmpty(boardList)}">
         <thead>
@@ -31,12 +30,13 @@
         <tbody>
         <tr th:each="boardData:${boardList}"
             th:onclick="|window.location.href='@{/board/detail/{id}(id=${boardData.id})}'|">
-            <td th:text="${boardData.id}"></td>
+            <td th:text="${boardData.rowNum}"></td>
             <td th:text="${boardData.title}"></td>
             <td th:text="${boardData.writer}"></td>
             <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
         </tr>
         </tbody>
     </table>
+    <button style="float: right;" onclick="location.href='/board/insert'">등록</button>
 </body>
 </html>

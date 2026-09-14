@@ -57,12 +57,10 @@ public class BoardController {
         return "update";
     }
 
-    @PostMapping("/update")
-    private String boardUpdate(@ModelAttribute BoardDTO board){
+    @PutMapping("/update/{id}")
+    private String boardUpdate(@PathVariable Long id, BoardDTO board){
         boardService.updateBoard(board);
-        long id = board.getId();
-        String detail_id = Long.toString(id);
-        return "redirect:/board/detail/"+detail_id;
+        return "redirect:/board/detail/" + id;
     }
 
     @GetMapping("/delete/{id}")
@@ -71,7 +69,7 @@ public class BoardController {
         return "delete";
     }
 
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     private String boardDelete(@PathVariable Long id, String pw, @ModelAttribute BoardDTO board){
         boardService.deleteBoard(id, pw);
         return "redirect:/board/list";

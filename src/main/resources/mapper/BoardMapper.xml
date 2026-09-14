@@ -4,16 +4,22 @@
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
     <select id="findBoardAll" resultType="BoardDTO">
-        SELECT id, title, writer, created_at
+        SELECT id,
+               ROW_NUMBER() over (ORDER BY id ASC) AS row_num,
+               title, writer, created_at
         FROM board
     </select>
     <select id="findBoardByTitle" parameterType="string" resultType="BoardDTO">
-        SELECT id, title, writer, created_at
+        SELECT id,
+               ROW_NUMBER() over (ORDER BY id ASC) AS row_num,
+               title, writer, created_at
         FROM board
         WHERE title LIKE CONCAT('%', #{keyword}, '%');
     </select>
     <select id="findBoardById" resultType="BoardDTO">
-        SELECT id, title, content, writer, created_at
+        SELECT id,
+        ROW_NUMBER() over (ORDER BY id ASC) AS row_num,
+        title, content, writer, created_at
         FROM board
         WHERE id= #{id}
     </select>

@@ -8,10 +8,10 @@ spring:
     username: js
     password:
 
-#  mvc:
-#    hiddenmethod:
-#      filter:
-#        enabled=true:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   h2:
     console:
       enabled: true

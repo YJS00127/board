@@ -7,33 +7,27 @@
     <h1>게시글 수정</h1>
     <button type="submit" style="float: right;"
             onclick="location.href='/board/list'">목록</button>
-    <form role="form" th:object="${boardDTO}"
-          th:action="@{/board/update}" method="post">
-        <div>
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title"
-                   th:value="${boardDetail.title}">
-        </div>
-        <div>
-            <label for="writer">작성자</label>
-            <input type="text" id="writer" name="writer"
-                   th:value="${boardDetail.writer}">
-        </div>
-        <div>
-            <label for="content">내용</label>
-            <input type="text" id="content" name="content"
-                   th:value="${boardDetail.content}">
-        </div>
-        <div>
-            <label for="pw">비밀번호 확인</label>
-            <input type="text" id="pw" name="pw"
-                   th:value="${boardDetail.pw}"
-                   placeholder="확인용 비밀번호를 입력하세요.">
-        </div>
+    <form th:action="@{/board/update/{id}(id=${boardDetail.id})}"
+          method="post">
+
+        <input type="hidden" name="_method" value="put">
+
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title"
+               th:value="${boardDetail.title}"><br>
+        <label for="writer">작성자</label>
+        <input type="text" id="writer" name="writer"
+               th:value="${boardDetail.writer}"><br>
+        <label for="content">내용</label>
+        <input type="text" id="content" name="content"
+               th:value="${boardDetail.content}"><br>
+        <label for="pw">비밀번호 확인</label>
+        <input type="text" id="pw" name="pw"
+               th:value="${boardDetail.pw}"
+               placeholder="확인용 비밀번호를 입력하세요"><br>
         <div style="float: right">
-            <input type="hidden" name="id" th:value="${boardDetail.id}">
             <input type="submit" th:value="저장">
-            <button onclick="location.href='board/detail/{id}'">취소</button>
+            <button type="button" th:onclick="|location.href='@{/board/detail/{id}(id=${boardDetail.id})}'|">취소</button>
         </div>
     </form>
 </body>
