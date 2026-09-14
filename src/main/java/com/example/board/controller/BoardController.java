@@ -2,12 +2,9 @@ package com.example.board.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.NoArgsConstructor;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +19,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    private String boardList(Model model, HttpServletRequest request){
+    private String boardList(Model model){
         List<BoardDTO> boardList = new ArrayList<>();
         boardList = boardService.findBoardAll();
         model.addAttribute("boardList", boardList);
@@ -41,7 +38,7 @@ public class BoardController {
     }
 
     @PostMapping("/insert")
-    private String boardInsert(@ModelAttribute BoardDTO board, HttpServletRequest request){
+    private String boardInsert(@ModelAttribute BoardDTO board){
         boardService.insertBoard(board);
         return "redirect:/board/list";
     }
@@ -58,11 +55,16 @@ public class BoardController {
         long id = board.getId();
         String detail_id = Long.toString(id);
         return "redirect:/board/detail/"+detail_id;
-
     }
 
-    @DeleteMapping("/delete/{id}")
-    private String boardDelete(@PathVariable Long id, String pw, Model model){
+    @GetMapping("/delete/{id}")
+    private String boardDelete(@PathVariable Long id, Model model){
+        model.addAttribute("boardDetail", boardService.findBoardById(id));
+        return "delete";
+    }
+
+    @PostMapping("/delete/{id}")
+    private String boardDelete(@PathVariable Long id, String pw, @ModelAttribute BoardDTO board){
         boardService.deleteBoard(id, pw);
         return "redirect:/board/list";
     }

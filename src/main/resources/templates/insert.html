@@ -13,28 +13,28 @@
         <form role="form" th:object=${boardDTO} th:action="@{/board/insert}"
               method="post" enctype="multipart/form-data">
             <div>
-                <label for="title">제목</label>
-                <input type="text" th:field="*{title}" id="title" name="title"
-                placeholder="제목을 입력하세요" required="required">
+                <label>제목</label>
+                <input type="text" th:field="*{title}"
+                    placeholder="제목을 입력하세요" required="required">
             </div>
             <div>
-                <label for="writer">작성자</label>
-                <input type="text" th:field="*{writer}" id="writer" name="writer"
+                <label>작성자</label>
+                <input type="text" th:field="*{writer}"
                        placeholder="작성자를 입력하세요" required="required">
             </div>
             <div>
-                <label for="content">내용</label>
-                <input type="text" th:field="*{content}" id="content" name="content"
+                <label>내용</label>
+                <input type="text" th:field="*{content}"
                        placeholder="내용을 입력하세요" required="required">
             </div>
             <div>
-                <label for="pw">비밀번호</label>
-                <input type="text" th:field="*{pw}" id="pw" name="pw"
+                <label>비밀번호</label>
+                <input type="text" th:field="*{pw}"
                        placeholder="비밀번호를 입력하세요" required="required">
             </div>
             <div style="float:right;">
                 <input type="submit" th:value="작성">
-                <input type="reset" th:value="취소">
+                <input type="reset" th:value="초기화">
             </div>
         </form>
     </div>

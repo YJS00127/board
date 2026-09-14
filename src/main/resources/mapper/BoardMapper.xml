@@ -28,5 +28,8 @@
         DELETE FROM board
         WHERE id= #{id} AND pw= #{pw}
     </delete>
+<!--    <select id="findBoardByTitle" resultType="BoardDTO">-->
+<!--        -->
+<!--    </select>-->
 
 </mapper>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 삭제 확인</title>
+</head>
+<body>
+    <h1>게시글 삭제</h1>
+    <button style="float:right;" onclick="location.href='/board/list'">목록</button>
+    <br>
+    <form role="form" th:action="@{/board/delete/{id}(id=${boardDetail.id})}">
+        <div>
+            <label for="pw">비밀번호 확인</label>
+            <input type="text" id="pw" name="pw"
+                   placeholder="확인용 비밀번호를 입력하세요."><br>
+            <div style="float:right;">
+                <input type="submit" formmethod="post" value="삭제">
+                <input type="submit" formmethod="get"
+                       th:formaction="@{/board/detail/{id}(id=${boardDetail.id})}" value="취소">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
