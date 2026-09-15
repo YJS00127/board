@@ -8,17 +8,18 @@
     <h1>게시글 삭제</h1>
     <button style="float:right;" onclick="location.href='/board/list'">목록</button>
     <br>
-    <form role="form" th:action="@{/board/delete/{id}(id=${boardDetail.id})}" method="post">
+    <form th:action="@{/board/delete/{id}(id=${boardDetail.id})}"
+          method="post">
+
         <input type="hidden" name="_method" value="delete">
-        <div>
-            <label for="pw">비밀번호 확인</label>
-            <input type="text" id="pw" name="pw"
-                   placeholder="확인용 비밀번호를 입력하세요"><br>
-            <div style="float:right;">
-                <input type="submit" formmethod="post" value="삭제">
-                <button type="button"
-                        th:onclick="|location.href='@{/board/detail/{id}(id=${boardDetail.id})}'|">취소</button>
-            </div>
+
+        <label for="pw">비밀번호 확인</label>
+        <input type="text" id="pw" name="pw"
+               placeholder="확인용 비밀번호를 입력하세요"><br>
+        <div style="float:right;">
+            <input type="submit" th:value="삭제">
+            <button type="button"
+                    th:onclick="|location.href='@{/board/detail/{id}(id=${boardDetail.id})}'|">취소</button>
         </div>
     </form>
 </body>
