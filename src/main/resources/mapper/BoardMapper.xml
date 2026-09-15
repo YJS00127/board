@@ -18,7 +18,6 @@
     </select>
     <select id="findBoardById" resultType="BoardDTO">
         SELECT id,
-        ROW_NUMBER() over (ORDER BY id ASC) AS row_num,
         title, content, writer, created_at
         FROM board
         WHERE id= #{id}
