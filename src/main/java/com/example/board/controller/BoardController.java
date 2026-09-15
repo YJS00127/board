@@ -27,7 +27,7 @@ public class BoardController {
     }
 
     @GetMapping("/search")
-    private String boardSearch(@ModelAttribute BoardDTO board, Model model, String keyword){
+    private String boardSearch(Model model, String keyword){
         List<BoardDTO> boardList = new ArrayList<>();
         boardList = boardService.findBoardByTitle(keyword);
         model.addAttribute("boardList", boardList);
@@ -41,7 +41,7 @@ public class BoardController {
     }
 
     @GetMapping("/insert")
-    private String boardInsertForm(@ModelAttribute BoardDTO board){
+    private String boardInsertForm(){
         return "insert";
     }
 

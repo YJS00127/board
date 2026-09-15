@@ -10,7 +10,7 @@
         <button onclick="location.href='/board/list'">목록</button>
     </div>
     <form th:action="@{/board/search}" method="get">
-        <input type="text" id="keyword" name="keyword" placeholder="제목을 검색하세요">
+        <input type="text" name="keyword" placeholder="제목을 검색하세요">
         <button type="submit">검색</button>
     </form>
     <div th:if="${#lists.isEmpty(boardList)}">
