@@ -38,6 +38,7 @@ MyBatis(3.0.5)
 
 ## 파일 구성
 
+```bash
 \---src
 +---main
 |   +---java
@@ -75,4 +76,5 @@ MyBatis(3.0.5)
 |               insert.html
 |               list.html
 |               update.html
----
+```
+

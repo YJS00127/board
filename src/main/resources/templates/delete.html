@@ -8,7 +8,7 @@
     <h1>게시글 삭제</h1>
     <button style="float:right;" onclick="location.href='/board/list'">목록</button>
     <br>
-    <form th:action="@{/board/delete/{id}(id=${boardDetail.id})}"
+    <form th:action="@{/board/{id}(id=${boardDetail.id})}"
           method="post">
 
         <input type="hidden" name="_method" value="delete">

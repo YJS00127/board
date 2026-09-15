@@ -10,7 +10,7 @@
         <button style= "float:right;"  onclick="location.href='/board/list'">목록</button>
     </div>
     <div>
-        <form role="form" th:object=${boardDTO} th:action="@{/board/insert}"
+        <form role="form" th:object=${boardDTO} th:action="@{/board}"
               method="post" enctype="multipart/form-data">
                 <label for="title">제목</label>
                 <input type="text" id='title' name='title' th:value="${title}"

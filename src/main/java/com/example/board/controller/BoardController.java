@@ -19,18 +19,17 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/list")
-    private String boardList(Model model){
-        List<BoardDTO> boardList = new ArrayList<>();
-        boardList = boardService.findBoardAll();
+    private String boardList(Model model,
+                             @RequestParam(required = false) String keyword){
+        List<BoardDTO> boardList;
+        if(keyword == null || keyword.isBlank()){
+            boardList = boardService.findBoardAll();
+        } else{
+            boardList = boardService.findBoardByTitle(keyword);
+        }
         model.addAttribute("boardList", boardList);
-        return "list";
-    }
-
-    @GetMapping("/search")
-    private String boardSearch(Model model, String keyword){
-        List<BoardDTO> boardList = new ArrayList<>();
-        boardList = boardService.findBoardByTitle(keyword);
-        model.addAttribute("boardList", boardList);
+        model.addAttribute("keyword", keyword);
+        
         return "list";
     }
 
@@ -45,7 +44,7 @@ public class BoardController {
         return "insert";
     }
 
-    @PostMapping("/insert")
+    @PostMapping
     private String boardInsert(@ModelAttribute BoardDTO board){
         boardService.insertBoard(board);
         return "redirect:/board/list";
@@ -57,7 +56,7 @@ public class BoardController {
         return "update";
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     private String boardUpdate(@PathVariable Long id, BoardDTO board){
         boardService.updateBoard(board);
         return "redirect:/board/detail/" + id;
@@ -69,7 +68,7 @@ public class BoardController {
         return "delete";
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     private String boardDelete(@PathVariable Long id, String pw, @ModelAttribute BoardDTO board){
         boardService.deleteBoard(id, pw);
         return "redirect:/board/list";
