@@ -28,9 +28,9 @@
         </thead>
 
         <tbody>
-        <tr th:each="boardData:${boardList}"
+        <tr th:each="boardData, stat :${boardList}"
             th:onclick="|window.location.href='@{/board/detail/{id}(id=${boardData.id})}'|">
-            <td th:text="${boardData.rowNum}"></td>
+            <td th:text="${stat.count}"></td>
             <td th:text="${boardData.title}"></td>
             <td th:text="${boardData.writer}"></td>
             <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
