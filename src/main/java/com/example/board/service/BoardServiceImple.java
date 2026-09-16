@@ -37,7 +37,7 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int deleteBoard(Long id, String pw){
+    public boolean deleteBoard(Long id, String pw){
         return boardMapper.deleteBoard(id, pw);
     }
 }

@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 목록</title>
+    <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
     <h1>게시판 목록</h1>
     <div style="float: right;">
-        <button onclick="location.href='/board/list'">목록</button>
+        <button style="float: right;" onclick="location.href='/board/insert'">등록</button>
     </div>
     <form th:action="@{/board/list}" method="get">
         <input type="text" name="keyword" placeholder="제목을 검색하세요">
@@ -24,19 +25,22 @@
             <th>제목</th>
             <th>작성자</th>
             <th>작성일</th>
+            <th>작성시간</th>
         </tr>
         </thead>
 
         <tbody>
-        <tr th:each="boardData, stat :${boardList}"
-            th:onclick="|window.location.href='@{/board/detail/{id}(id=${boardData.id})}'|">
+        <tr th:each="boardData, stat :${boardList}">
             <td th:text="${stat.count}"></td>
-            <td th:text="${boardData.title}"></td>
+            <td>
+            <a th:href="@{/board/detail/{id}(id=${boardData.id})}"
+                th:text="${boardData.title}"></a>
+            </td>
             <td th:text="${boardData.writer}"></td>
             <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
+            <td th:text="${#temporals.format(boardData.createdAt, 'HH:mm')}"></td>
         </tr>
         </tbody>
     </table>
-    <button style="float: right;" onclick="location.href='/board/insert'">등록</button>
 </body>
 </html>

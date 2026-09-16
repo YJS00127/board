@@ -7,8 +7,7 @@
 <body>
     <h1>상세 게시글</h1>
     <button style= "float:right;" onclick="location.href='/board/list'">목록</button>
-    <div>
-<form>
+<form id="boardDetailContents">
     <div>
         <h3>제목</h3>
         <p th:text="${boardDetail.title}"></p>
@@ -23,15 +22,14 @@
     </div>
     <div>
         <h3>작성일자</h3>
-        <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd')}"></p>
+        <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd | HH:mm')}"></p>
     </div>
 
-    <div style="float: right">
-        <input type="submit" th:value="수정"
-               th:formaction="@{/board/update/{id}(id=${boardDetail.id})}">
-        <input type="submit" th:value="삭제"
-               th:formaction="@{/board/delete/{id}(id=${boardDetail.id})}">
+    <div style="float: right" id="pwChk">
+        <button type="button" onclick="pwChk()">수정</button>
+        <button type="button" onclick="pwChk()">삭제</button>
     </div>
+    <script th:src="@{/js/board.js}"></script>
 </form>
 </body>
 </html>

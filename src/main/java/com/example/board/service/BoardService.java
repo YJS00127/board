@@ -9,6 +9,7 @@ public interface BoardService {
     BoardDTO findBoardById(Long id);
     int insertBoard(BoardDTO board);
     int updateBoard(BoardDTO board);
-    int deleteBoard(Long id, String pw);
+    boolean deleteBoard(Long id, String pw);
+
 
 }
