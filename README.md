@@ -25,14 +25,14 @@ MyBatis(3.0.5)
 ## API 명세
 
 
-| HTTP    | URL                   | 설명                    |
-|---------|-----------------------|-------------------------|
-| GET     | /board/list           | 게시판 목록 조회        |
-| GET     | /board/list?keyword=  | 게시판 목록 검색 (제목) |
-| GET     | /board/detail/{id}    | 게시글 조회             |
-| POST    | /board/insert         | 게시글 등록             |
-| PUT     | /board/{id}           | 게시글 수정             |
-| DELETE  | /board/{id}           | 게시글 삭제             |
+| HTTP    | URL                    | 설명                    |
+|---------|------------------------|-------------------------|
+| GET     | /board/list            | 게시판 목록 조회        |
+| GET     | /board/list?keyword=   | 게시판 목록 검색 (제목) |
+| GET     | /board/detail/{id}     | 게시글 조회             |
+| POST    | /board                 | 게시글 등록             |
+| PUT     | /board/{id}            | 게시글 수정             |
+| DELETE  | /board/{id}            | 게시글 삭제             |
 
 ---
 
