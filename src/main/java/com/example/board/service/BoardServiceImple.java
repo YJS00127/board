@@ -40,4 +40,9 @@ public class BoardServiceImple implements BoardService{
     public boolean deleteBoard(Long id, String pw){
         return boardMapper.deleteBoard(id, pw);
     }
+
+    @Override
+    public boolean chkPw(Long id, String pw){
+     return (boardMapper.findBoardById(id).getPw().equals(pw));
+    }
 }

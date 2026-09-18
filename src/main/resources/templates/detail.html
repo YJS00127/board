@@ -25,11 +25,12 @@
         <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd | HH:mm')}"></p>
     </div>
 
-    <div style="float: right" id="pwChk">
-        <button type="button" onclick="pwChk()">수정</button>
-        <button type="button" onclick="pwChk()">삭제</button>
-    </div>
-    <script th:src="@{/js/board.js}"></script>
+    <script>
+        <div style="float: right" id="pwChk">
+            <button type="button" onclick="pwChk()">수정</button>
+            <button type="button" onclick="pwChk()">삭제</button>
+        </div>
+    </script>
 </form>
 </body>
 </html>

@@ -74,6 +74,12 @@ public class BoardController {
     @DeleteMapping("/{id}")
     @ResponseBody
     private boolean boardDelete(@PathVariable Long id, @RequestParam String pw) {
-        return boardService.deleteBoard(id, pw);
+        if(boardService.chkPw(id, pw)){
+            return boardService.deleteBoard(id, pw);
+        } else {
+            return
+        }
     }
+
+
 }

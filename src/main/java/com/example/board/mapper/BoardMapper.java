@@ -13,4 +13,5 @@ public interface BoardMapper {
     int insertBoard(BoardDTO board);
     int updateBoard(BoardDTO board);
     boolean deleteBoard(Long id, String pw);
+    boolean chkPw(Long id, String pw);
 }
