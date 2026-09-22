@@ -32,13 +32,13 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int updateBoard(BoardDTO board){
-        return boardMapper.updateBoard(board);
+    public boolean updateBoard(BoardDTO board){
+        return boardMapper.updateBoard(board) > 0;
     }
 
     @Override
     public boolean deleteBoard(Long id, String pw){
-        return boardMapper.deleteBoard(id, pw);
+        return boardMapper.deleteBoard(id, pw) > 0;
     }
 
     @Override

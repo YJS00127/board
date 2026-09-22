@@ -1,14 +1,34 @@
-function pwChk(type){
-    // 데이터 얻어오기
-    while(true) {
-        // 맞을 때, null일 때, (틀릴 때, 공백일 때) => 묶어서 다시 재시도
-        // js에서 백데이터를 쓰려면 json으로 받아야하는듯..
-        var pwInput = prompt('비밀번호를 입력해주세요.', '');
-        if (pwInput === "") {
-            alert("다시 시도해주세요.")
-        } else if(pwInput === null) {
-            break
-        }
+function pwChk(type, id){
+    const pwInput = prompt('비밀번호를 입력해주세요.', '');
+
+    if(pwInput === null) return;
+
+    if(type === 'delete') {
+        fetch(`/board/${id}?pw=${encodeURIComponent(pwInput)}`, {
+            method: "DELETE"
+        })
+            .then(response => response.json())
+            .then(result => {
+                if (result) {
+                    alert("게시글이 삭제되었습니다.")
+                    location.href = "/board";
+                } else {
+                    alert("비밀번호가 틀렸습니다.")
+                }
+            });
+    } else if(type === 'update'){
+        fetch(`/board/${id}`, {
+            method: "GET"
+        })
+        .then(response => response.json())
+        .then(result => {
+            if(result) {
+                alert("비밀번호가 일치합니다. 수정 화면으로 이동합니다.")
+                location.href = `/board/update/${id}`
+            } else {
+                alert("비밀번호가 틀렸습니다.")
+            }
+        })
     }
 
 }

@@ -14,7 +14,7 @@
     </select>
     <select id="findBoardById" resultType="BoardDTO">
         SELECT id,
-        title, content, writer, created_at
+        title, content, writer, created_at, pw
         FROM board
         WHERE id= #{id}
     </select>
@@ -28,7 +28,7 @@
             content= #{content},
             writer= #{writer},
             created_at= CURRENT_TIMESTAMP
-        WHERE id= #{id} AND pw= #{pw}
+        WHERE id= #{id}
     </update>
     <delete id="deleteBoard">
         DELETE FROM board

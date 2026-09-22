@@ -8,9 +8,9 @@
 <body>
     <h1>게시판 목록</h1>
     <div style="float: right;">
-        <button style="float: right;" onclick="location.href='/board/insert'">등록</button>
+        <a style="float: right;" href="/board/insert">등록</a>
     </div>
-    <form th:action="@{/board/list}" method="get">
+    <form th:action="@{/board}" method="get">
         <input type="text" name="keyword" placeholder="제목을 검색하세요">
         <button type="submit">검색</button>
     </form>

@@ -7,23 +7,23 @@
 <body>
     <div>
         <h1>게시글 작성</h1>
-        <button style= "float:right;"  onclick="location.href='/board/list'">목록</button>
+        <a style="float: right;" href="/board">목록</a>
     </div>
     <div>
         <form role="form" th:object=${boardDTO} th:action="@{/board}"
               method="post" enctype="multipart/form-data">
                 <label for="title">제목</label>
                 <input type="text" id='title' name='title' th:value="${title}"
-                    placeholder="제목을 입력하세요" required="required"><br>
+                    placeholder="제목을 입력하세요" required><br>
                 <label for="writer">작성자</label>
                 <input type="text" id="writer" name="writer" th:value="${writer}"
-                       placeholder="작성자를 입력하세요" required="required"><br>
+                       placeholder="작성자를 입력하세요" required><br>
                 <label for="content">내용</label>
                 <input type="text" id="content" name="content" th:value="${content}"
-                       placeholder="내용을 입력하세요" required="required"><br>
+                       placeholder="내용을 입력하세요" required><br>
                 <label for="pw">비밀번호</label>
                 <input type="text" id="pw" name="pw" th:pw="${pw}"
-                       placeholder="비밀번호를 입력하세요" required="required"><br>
+                       placeholder="비밀번호를 입력하세요" required><br>
             <div style="float:right;">
                 <input type="submit" th:value="작성">
                 <input type="reset" th:value="초기화">

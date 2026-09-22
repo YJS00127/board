@@ -6,7 +6,7 @@
 </head>
 <body>
     <h1>상세 게시글</h1>
-    <button style= "float:right;" onclick="location.href='/board/list'">목록</button>
+    <a style="float: right;" href="/board">목록</a>
 <form id="boardDetailContents">
     <div>
         <h3>제목</h3>
@@ -25,12 +25,12 @@
         <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd | HH:mm')}"></p>
     </div>
 
-    <script>
-        <div style="float: right" id="pwChk">
-            <button type="button" onclick="pwChk()">수정</button>
-            <button type="button" onclick="pwChk()">삭제</button>
-        </div>
-    </script>
+
+    <div style="float: right" id="pwChk">
+        <button type="button" th:onclick="|pwChk('update', ${boardDetail.id})|">수정</button>
+        <button type="button" th:onclick="|pwChk('delete', ${boardDetail.id})|">삭제</button>
+    </div>
 </form>
+    <script src="/js/board.js"></script>
 </body>
 </html>

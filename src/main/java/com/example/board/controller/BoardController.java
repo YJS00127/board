@@ -12,6 +12,7 @@ import java.util.List;
 
 import com.example.board.dto.BoardDTO;
 import com.example.board.service.BoardService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("board")
@@ -20,7 +21,7 @@ public class BoardController {
     private final BoardService boardService;
 
     // View 이동
-    @GetMapping("/list")
+    @GetMapping
     private String boardList(Model model,
                              @RequestParam(required = false) String keyword){
         List<BoardDTO> boardList;
@@ -52,17 +53,18 @@ public class BoardController {
         return "update";
     }
 
-    @GetMapping("/delete/{id}")
-    private String boardDelete(@PathVariable Long id, Model model){
-        model.addAttribute("boardDetail", boardService.findBoardById(id));
-        return "delete";
-    }
-
     // 로직 처리
     @PostMapping
     private String boardInsert(@ModelAttribute BoardDTO board){
         boardService.insertBoard(board);
-        return "redirect:/board/list";
+        return "redirect:/board";
+    }
+
+    // 수정 전에 비밀번호 확인
+    @PostMapping("/{id}/check-pw")
+    @ResponseBody
+    private boolean check(@PathVariable Long id, @RequestParam String pw){
+        return boardService.chkPw(id, pw);
     }
 
     @PutMapping("/{id}")
@@ -71,13 +73,14 @@ public class BoardController {
         return "redirect:/board/detail/" + id;
     }
 
+
     @DeleteMapping("/{id}")
     @ResponseBody
     private boolean boardDelete(@PathVariable Long id, @RequestParam String pw) {
         if(boardService.chkPw(id, pw)){
             return boardService.deleteBoard(id, pw);
         } else {
-            return
+            return false;
         }
     }
 
