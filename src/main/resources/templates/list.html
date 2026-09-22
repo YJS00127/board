@@ -8,7 +8,8 @@
 <body>
     <h1>게시판 목록</h1>
     <div style="float: right;">
-        <a style="float: right;" href="/board/insert">등록</a>
+        <a href="#" class="btn-gradient gray small">Button</a>
+        <a href="/board/insert">등록</a>
     </div>
     <form th:action="@{/board}" method="get">
         <input type="text" name="keyword" placeholder="제목을 검색하세요">

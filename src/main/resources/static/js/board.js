@@ -16,9 +16,9 @@ function pwChk(type, id){
                     alert("비밀번호가 틀렸습니다.")
                 }
             });
-    } else if(type === 'update'){
-        fetch(`/board/${id}`, {
-            method: "GET"
+    } else if(type === 'updatePwChk'){
+        fetch(`/board/${id}/check-pw?pw=${encodeURIComponent(pwInput)}`, {
+            method: "POST"
         })
         .then(response => response.json())
         .then(result => {

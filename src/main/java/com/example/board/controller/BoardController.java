@@ -72,8 +72,7 @@ public class BoardController {
         boardService.updateBoard(board);
         return "redirect:/board/detail/" + id;
     }
-
-
+    
     @DeleteMapping("/{id}")
     @ResponseBody
     private boolean boardDelete(@PathVariable Long id, @RequestParam String pw) {
