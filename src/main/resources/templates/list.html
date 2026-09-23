@@ -3,40 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <title>게시판 목록</title>
+    <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
-    <h1>게시판 목록</h1>
-    <div style="float: right;">
-        <button onclick="location.href='/board/list'">목록</button>
-    </div>
-    <form th:action="@{/board/list}" method="get">
-        <input type="text" name="keyword" placeholder="제목을 검색하세요">
-        <button type="submit">검색</button>
-    </form>
-    <div th:if="${#lists.isEmpty(boardList)}">
-        <h2>등록된 게시글이 없습니다.</h2>
-    </div>
-    <br>
-    <table th:if="${!#lists.isEmpty(boardList)}">
-        <thead>
-        <tr>
-            <th>번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>작성일</th>
-        </tr>
-        </thead>
+<h1>게시판 목록</h1>
+<div style="float: right;">
+    <a href="/board/insert" class="btn-gradient gray small">등록</a>
+</div>
+<form th:action="@{/board}" method="get">
+    <input type="text" name="keyword" placeholder="제목을 검색하세요">
+    <button>검색</button>
+</form>
+<div th:if="${#lists.isEmpty(boardList)}">
+    <h2>등록된 게시글이 없습니다.</h2>
+</div>
+<br>
+<table th:if="${!#lists.isEmpty(boardList)}">
+    <thead>
+    <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>작성시간</th>
+    </tr>
+    </thead>
 
-        <tbody>
-        <tr th:each="boardData, stat :${boardList}"
-            th:onclick="|window.location.href='@{/board/detail/{id}(id=${boardData.id})}'|">
-            <td th:text="${stat.count}"></td>
-            <td th:text="${boardData.title}"></td>
-            <td th:text="${boardData.writer}"></td>
-            <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
-        </tr>
-        </tbody>
-    </table>
-    <button style="float: right;" onclick="location.href='/board/insert'">등록</button>
+    <tbody>
+    <tr th:each="boardData, stat :${boardList}">
+        <td th:text="${stat.count}"></td>
+        <td>
+            <a th:href="@{/board/detail/{id}(id=${boardData.id})}"
+               th:text="${boardData.title}"></a>
+        </td>
+        <td th:text="${boardData.writer}"></td>
+        <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
+        <td th:text="${#temporals.format(boardData.createdAt, 'HH:mm')}"></td>
+    </tr>
+    </tbody>
+</table>
+<nav>
+    <ul class="pagination justify-content-center mt-4">
+        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+            <a class="page-link" th:href="@{/board(keyword=${keyword}, page=${currentPage - 1})}">이전</a>
+        </li>
+
+        <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
+            th:classappend="${i == currentPage} ? 'active'">
+            <a class="page-link" th:href="@{/board(keyword=${keyword}, page=${i})}" th:text="${i}">1</a>
+        </li>
+
+        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+            <a class="page-link" th:href="@{/board(keyword=${keyword}, page=${currentPage + 1})}">다음</a>
+        </li>
+    </ul>
+</nav>
 </body>
 </html>

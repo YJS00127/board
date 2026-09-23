@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,12 +15,16 @@ public class BoardServiceImple implements BoardService{
     private final BoardMapper boardMapper;
 
     @Override
-    public List<BoardDTO> findBoardAll() {
-        return boardMapper.findBoardAll();
+    public List<BoardDTO> findBoardAll(int page, int pageSize) {
+        int offset = (page - 1) * pageSize;
+        return boardMapper.findBoardAll(pageSize, offset);
     }
 
     @Override
-    public List<BoardDTO> findBoardByTitle(String keyword) { return boardMapper.findBoardByTitle(keyword);}
+    public List<BoardDTO> findBoardByTitle(String keyword, int page, int pageSize) {
+       int offset = (page - 1) * pageSize;
+        return boardMapper.findBoardByTitle(keyword, pageSize, offset);
+    }
 
     @Override
     public BoardDTO findBoardById(Long id){
@@ -32,12 +37,29 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int updateBoard(BoardDTO board){
-        return boardMapper.updateBoard(board);
+    public boolean updateBoard(BoardDTO board) {
+        return boardMapper.updateBoard(board) > 0;
     }
 
     @Override
-    public int deleteBoard(Long id, String pw){
-        return boardMapper.deleteBoard(id, pw);
+    public boolean deleteBoard(Long id, String pw){
+        return boardMapper.deleteBoard(id, pw) > 0;
     }
+
+    @Override
+    public boolean chkPw(Long id, String pw){
+     return (boardMapper.findBoardById(id).getPw().equals(pw));
+    }
+
+    @Override
+    public int countBoards(){
+        return boardMapper.countBoards();
+    }
+
+    @Override
+    public int countBoardsByKeyword(String keyword){
+        return boardMapper.countBoardsByKeyword(keyword);
+    }
+
+
 }
