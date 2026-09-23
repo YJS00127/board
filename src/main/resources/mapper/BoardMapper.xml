@@ -6,11 +6,15 @@
     <select id="findBoardAll" resultType="BoardDTO">
         SELECT id, title, writer, created_at
         FROM board
+        ORDER BY id DESC
+        LIMIT #{limit} OFFSET #{offset}
     </select>
-    <select id="findBoardByTitle" parameterType="string" resultType="BoardDTO">
+    <select id="findBoardByTitle" resultType="BoardDTO">
         SELECT id, title, writer, created_at
         FROM board
-        WHERE title LIKE CONCAT('%', #{keyword}, '%');
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        ORDER BY id DESC
+        LIMIT #{limit} OFFSET #{offset}
     </select>
     <select id="findBoardById" resultType="BoardDTO">
         SELECT id,
@@ -35,4 +39,13 @@
         WHERE id= #{id} AND pw= #{pw}
     </delete>
 
+<!--    페이지네이션-->
+    <select id="countBoards" resultType="int">
+        SELECT COUNT(*) FROM board
+    </select>
+
+    <select id="countBoardsByKeyword" resultType="int">
+        SELECT COUNT(*) FROM board
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+    </select>
 </mapper>

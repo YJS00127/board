@@ -1,18 +1,15 @@
 package com.example.board.controller;
 
+import com.example.board.dto.BoardDTO;
+import com.example.board.service.BoardService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-
-import com.example.board.dto.BoardDTO;
-import com.example.board.service.BoardService;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("board")
@@ -23,15 +20,32 @@ public class BoardController {
     // View 이동
     @GetMapping
     private String boardList(Model model,
-                             @RequestParam(required = false) String keyword){
+                             @RequestParam(required = false) String keyword,
+                             @RequestParam(defaultValue = "1") int page){
+        int pageSize = 10;
+
+        int total = boardService.countBoards();
+        int totalPages = (int)Math.ceil((double)total / pageSize);
+
+        if(page < 1) page = 1;
+        if(page > totalPages) page = totalPages;
+
         List<BoardDTO> boardList;
         if(keyword == null || keyword.isBlank()){
-            boardList = boardService.findBoardAll();
+            boardList = boardService.findBoardAll(page, pageSize);
         } else{
-            boardList = boardService.findBoardByTitle(keyword);
+            total = boardService.countBoardsByKeyword(keyword);
+            totalPages = (int)Math.ceil((double)total / pageSize);
+
+            if(page < 1) page = 1;
+            if(page > totalPages) page = totalPages;
+
+            boardList = boardService.findBoardByTitle(keyword, page, pageSize);
         }
-        boardList.sort(Comparator.comparing(BoardDTO::getId).reversed());
         model.addAttribute("boardList", boardList);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
 
         return "list";
     }
