@@ -1,10 +1,72 @@
-table, th, td {
-    border: 1px solid black;
+table {
     border-collapse: collapse;
 }
+
+th, td {
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
 .pagination{
     display: flex;
     justify-content: center;
     list-style: none;
     gap: 10px;
+}
+
+.page-link {
+    text-decoration-line: none;
+}
+
+.page-link:hover{
+    text-decoration-line: underline;
+}
+
+.a-btn {
+    float: right;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration-line: none;
+    margin: 3px;
+}
+
+.a-btn:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.search {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-decoration-line: none;
+}
+
+.search:hover{
+    background-color: #000;
+    color: #fff;
+}
+.title {
+    text-decoration-line: none;
+}
+
+.title:hover {
+    text-decoration-line: underline;
+}
+
+.created-day, .created-time {
+    text-align: center;
 }

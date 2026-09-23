@@ -7,12 +7,10 @@
 </head>
 <body>
 <h1>게시판 목록</h1>
-<div style="float: right;">
-    <a href="/board/insert" class="btn-gradient gray small">등록</a>
-</div>
+<a class="a-btn" href="/board/insert">등록</a>
 <form th:action="@{/board}" method="get">
     <input type="text" name="keyword" placeholder="제목을 검색하세요">
-    <button>검색</button>
+    <button class="search">검색</button>
 </form>
 <div th:if="${#lists.isEmpty(boardList)}">
     <h2>등록된 게시글이 없습니다.</h2>
@@ -31,14 +29,14 @@
 
     <tbody>
     <tr th:each="boardData, stat :${boardList}">
-        <td th:text="${stat.count}"></td>
+        <td th:text="${stat.count} + ${((currentPage)-1)*10}"></td>
         <td>
-            <a th:href="@{/board/detail/{id}(id=${boardData.id})}"
+            <a class="title" th:href="@{/board/detail/{id}(id=${boardData.id})}"
                th:text="${boardData.title}"></a>
         </td>
         <td th:text="${boardData.writer}"></td>
-        <td th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
-        <td th:text="${#temporals.format(boardData.createdAt, 'HH:mm')}"></td>
+        <td class="created-day" th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
+        <td class="created-time" th:text="${#temporals.format(boardData.createdAt, 'HH:mm')}"></td>
     </tr>
     </tbody>
 </table>

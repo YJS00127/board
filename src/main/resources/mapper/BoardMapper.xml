@@ -30,8 +30,7 @@
         UPDATE board
         SET title= #{title},
             content= #{content},
-            writer= #{writer},
-            created_at= CURRENT_TIMESTAMP
+            writer= #{writer}
         WHERE id= #{id}
     </update>
     <delete id="deleteBoard">
