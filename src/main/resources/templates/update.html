@@ -2,11 +2,11 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
     <meta charset="UTF-8">
     <title>게시글 수정</title>
+    <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
     <h1>게시글 수정</h1>
-    <a style="float: right;"
-       th:href="@{/board}">목록</a>
+    <a class="a-btn" href="/board">목록</a>
     <form th:action="@{/board/{id}(id=${boardDetail.id})}"
           method="post">
 
@@ -21,9 +21,9 @@
         <label for="content">내용</label>
         <input type="text" id="content" name="content"
                th:value="${boardDetail.content}" required><br>
-        <div style="float: right">
-            <button>저장</button>
-            <a th:href="@{/board/detail/{id}(id=${boardDetail.id})}">취소</a>
+        <div>
+            <button class ="a-btn">저장</button>
+            <a class ="a-btn" th:href="@{/board/detail/{id}(id=${boardDetail.id})}">취소</a>
         </div>
     </form>
 </body>
