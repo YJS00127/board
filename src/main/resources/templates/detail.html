@@ -26,10 +26,9 @@
         <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd | HH:mm')}"></p>
     </div>
 
-
     <div id="pwChk">
-        <button class="a-btn" type="button" th:onclick="|pwChk('updatePwChk', ${boardDetail.id})|">수정</button>
         <button class="a-btn" type="button" th:onclick="|pwChk('delete', ${boardDetail.id})|">삭제</button>
+        <button class="a-btn-first" type="button" th:onclick="|pwChk('updatePwChk', ${boardDetail.id})|">수정</button>
     </div>
 </form>
     <script src="/js/board.js"></script>

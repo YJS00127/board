@@ -23,6 +23,7 @@ public class BoardController {
                              @RequestParam(required = false) String keyword,
                              @RequestParam(defaultValue = "1") int page){
         int pageSize = 10;
+//        int pageSize = 2;
 
         int total = boardService.countBoards();
         int totalPages = (int)Math.ceil((double)total / pageSize);
@@ -68,17 +69,16 @@ public class BoardController {
     }
 
     // 로직 처리
+    @PostMapping("/{id}/pw-chk")
+    @ResponseBody
+    private boolean pwChk(@PathVariable Long id, @RequestParam String pw){
+        return boardService.chkPw(id, pw);
+    }
+
     @PostMapping
     private String boardInsert(@ModelAttribute BoardDTO board){
         boardService.insertBoard(board);
         return "redirect:/board";
-    }
-
-    // 수정 전에 비밀번호 확인
-    @PostMapping("/{id}/check-pw")
-    @ResponseBody
-    private boolean check(@PathVariable Long id, @RequestParam String pw){
-        return boardService.chkPw(id, pw);
     }
 
     @PutMapping("/{id}")
@@ -96,6 +96,4 @@ public class BoardController {
             return false;
         }
     }
-
-
 }

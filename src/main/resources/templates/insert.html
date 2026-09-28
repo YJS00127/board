@@ -11,7 +11,7 @@
         <a class="a-btn" href="/board">목록</a>
     </div>
     <div>
-        <form role="form" th:object=${boardDTO} th:action="@{/board}"
+        <form role="form" th:action="@{/board}"
               method="post" enctype="multipart/form-data">
             <label for="title">제목</label>
             <input type="text" id='title' name='title' th:value="${title}"
@@ -25,8 +25,8 @@
             <label for="pw">비밀번호</label>
             <input type="text" id="pw" name="pw" th:pw="${pw}"
                    placeholder="비밀번호를 입력하세요" required><br>
-            <button class ="a-btn">등록</button>
             <button class ="a-btn" type="reset">초기화</button>
+            <button class ="a-btn-first">등록</button>
         </form>
     </div>
     <div>

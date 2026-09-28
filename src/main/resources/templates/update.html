@@ -22,8 +22,8 @@
         <input type="text" id="content" name="content"
                th:value="${boardDetail.content}" required><br>
         <div>
-            <button class ="a-btn">저장</button>
             <a class ="a-btn" th:href="@{/board/detail/{id}(id=${boardDetail.id})}">취소</a>
+            <button class ="a-btn-first">수정</button>
         </div>
     </form>
 </body>

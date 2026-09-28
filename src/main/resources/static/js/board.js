@@ -17,7 +17,7 @@ function pwChk(type, id){
                 }
             });
     } else if(type === 'updatePwChk'){
-        fetch(`/board/${id}/check-pw?pw=${encodeURIComponent(pwInput)}`, {
+        fetch(`/board/${id}/pw-chk?pw=${encodeURIComponent(pwInput)}`, {
             method: "POST"
         })
         .then(response => response.json())
@@ -31,4 +31,19 @@ function pwChk(type, id){
         })
     }
 
+}
+
+function insertCheck(type){
+    fetch(`/board`, {
+        method:"POST"
+    })
+        .then(resposne => response.json())
+        .then(result => {
+            if(result){
+                alert("게시글 등록이 완료되었습니다.")
+                location.href="/board";
+            } else{
+                alert("게시글 등록에 실패하였습니다.")
+            }
+        })
 }

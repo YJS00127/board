@@ -6,12 +6,15 @@
     <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
-<h1>게시판 목록</h1>
-<a class="a-btn" href="/board/insert">등록</a>
-<form th:action="@{/board}" method="get">
-    <input type="text" name="keyword" placeholder="제목을 검색하세요">
-    <button class="search">검색</button>
-</form>
+<a class="boardList" href="/board">
+    <h1>게시판 목록</h1>
+</a>
+<div>
+    <a class="a-btn" href="/board/insert">등록</a>
+    <form class="search-box" th:action="@{/board}" method="get">
+        <input class="search-input" type="text" name="keyword" placeholder="검색어를 입력하세요"/>
+    </form>
+</div>
 <div th:if="${#lists.isEmpty(boardList)}">
     <h2>등록된 게시글이 없습니다.</h2>
 </div>
@@ -29,21 +32,21 @@
 
     <tbody>
     <tr th:each="boardData, stat :${boardList}">
-        <td th:text="${stat.count} + ${((currentPage)-1)*10}"></td>
+        <td class="boardCount" th:text="${stat.count} + ${((currentPage)-1)*10}"></td>
         <td>
             <a class="title" th:href="@{/board/detail/{id}(id=${boardData.id})}"
                th:text="${boardData.title}"></a>
         </td>
-        <td th:text="${boardData.writer}"></td>
+        <td class="boardWriter" th:text="${boardData.writer}"></td>
         <td class="created-day" th:text="${#temporals.format(boardData.createdAt, 'yyyy.MM.dd')}"></td>
         <td class="created-time" th:text="${#temporals.format(boardData.createdAt, 'HH:mm')}"></td>
     </tr>
     </tbody>
 </table>
 <nav>
-    <ul class="pagination justify-content-center mt-4">
+    <ul class="pagination mt-4">
         <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
-            <a class="page-link" th:href="@{/board(keyword=${keyword}, page=${currentPage - 1})}">이전</a>
+            <a class="page-link-before" th:href="@{/board(keyword=${keyword}, page=${currentPage - 1})}">이전</a>
         </li>
 
         <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"
@@ -52,7 +55,7 @@
         </li>
 
         <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
-            <a class="page-link" th:href="@{/board(keyword=${keyword}, page=${currentPage + 1})}">다음</a>
+            <a class="page-link-next" th:href="@{/board(keyword=${keyword}, page=${currentPage + 1})}">다음</a>
         </li>
     </ul>
 </nav>
