@@ -1,6 +1,8 @@
 /*제목 css*/
 .boardList {
     display: inline-block;
+    text-decoration-line: none;
+    color: black;
     margin-left: 10%;
 }
 
@@ -64,7 +66,7 @@ th, td {
     padding: 5px 10px;
 }
 
-.boardCount {
+.boardNum {
     width: 5%;
 }
 
@@ -75,6 +77,17 @@ th, td {
 .created-day, .created-time {
     text-align: center;
     width: 20%;
+}
+
+
+/*상세 게시글 이동 css*/
+.title {
+    text-decoration-line: none;
+    width: 45%;
+}
+
+.title:hover {
+    text-decoration-line: underline;
 }
 
 
@@ -96,6 +109,10 @@ nav{
     line-height: 1.5;
 }
 
+.page-item.disabled {
+    pointer-events: none;
+}
+
 .page-link {
     justify-content: center;
     display: inline-flex;
@@ -110,34 +127,11 @@ nav{
     text-decoration-line: none;
 }
 
-.page-link:hover, .page-link-next:hover, .page-link-before:hover{
+.page-link:hover{
     text-decoration-line: underline;
 }
 
 .page-item.active .page-link {
     box-shadow: inset 0 0 0 2px black;
-    text-decoration-line: none;
-}
-
-.page-link-before, .page-link-next {
-    text-decoration-line: none;
-    color: black;
-}
-
-
-/*상세 게시글 이동 css*/
-.title {
-    text-decoration-line: none;
-    width: 45%;
-}
-
-.title:hover {
-    text-decoration-line: underline;
-}
-
-
-/*게시판 목록 초기화*/
-.boardList {
-    color: black;
     text-decoration-line: none;
 }

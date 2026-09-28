@@ -20,30 +20,35 @@ function pwChk(type, id){
         fetch(`/board/${id}/pw-chk?pw=${encodeURIComponent(pwInput)}`, {
             method: "POST"
         })
-        .then(response => response.json())
-        .then(result => {
-            if(result) {
-                alert("비밀번호가 일치합니다. 수정 화면으로 이동합니다.")
-                location.href = `/board/update/${id}`
-            } else {
-                alert("비밀번호가 틀렸습니다.")
-            }
-        })
+            .then(response => response.json())
+            .then(result => {
+                if(result) {
+                    alert("비밀번호가 일치합니다. 수정 화면으로 이동합니다.")
+                    location.href = `/board/update/${id}`
+                } else {
+                    alert("비밀번호가 틀렸습니다.")
+                }
+            })
     }
 
-}
 
-function insertCheck(type){
-    fetch(`/board`, {
-        method:"POST"
-    })
-        .then(resposne => response.json())
-        .then(result => {
-            if(result){
-                alert("게시글 등록이 완료되었습니다.")
-                location.href="/board";
-            } else{
-                alert("게시글 등록에 실패하였습니다.")
-            }
-        })
+        // Controller도 json으로 바꿔야함
+
+        // if(type === 'delete'){
+        //     fetch(`/board/${id}`, {
+        //         method: "DELETE",
+        //         body: JSON.stringify({
+        //             pw: pwInput
+        //         }),
+        //     })
+        //         .then(response => response.json())
+        //         .then(result => {
+        //             if(result) {
+        //                 alert("게시글이 삭제되었습니다.")
+        //                 location.href = "/board";
+        //             } else{
+        //                 alert("비밀번호가 틀렸습니다. 다시 시도해주세요.")
+        //             }
+        //         });
+        // }
 }

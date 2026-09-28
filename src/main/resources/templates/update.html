@@ -7,9 +7,7 @@
 <body>
     <h1>게시글 수정</h1>
     <a class="a-btn" href="/board">목록</a>
-    <form th:action="@{/board/{id}(id=${boardDetail.id})}"
-          method="post">
-
+    <form th:action="@{/board/{id}(id=${boardDetail.id})}" method="post">
         <input type="hidden" name="_method" value="put">
 
         <label for="title">제목</label>

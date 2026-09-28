@@ -11,19 +11,18 @@
         <a class="a-btn" href="/board">목록</a>
     </div>
     <div>
-        <form role="form" th:action="@{/board}"
-              method="post" enctype="multipart/form-data">
+        <form th:action="@{/board}" method="post">
             <label for="title">제목</label>
-            <input type="text" id='title' name='title' th:value="${title}"
+            <input type="text" id='title' name='title'
                    placeholder="제목을 입력하세요" required><br>
             <label for="writer">작성자</label>
-            <input type="text" id="writer" name="writer" th:value="${writer}"
+            <input type="text" id="writer" name="writer"
                    placeholder="작성자를 입력하세요" required><br>
             <label for="content">내용</label>
-            <input type="text" id="content" name="content" th:value="${content}"
+            <input type="text" id="content" name="content"
                    placeholder="내용을 입력하세요" required><br>
             <label for="pw">비밀번호</label>
-            <input type="text" id="pw" name="pw" th:pw="${pw}"
+            <input type="password" id="pw" name="pw"
                    placeholder="비밀번호를 입력하세요" required><br>
             <button class ="a-btn" type="reset">초기화</button>
             <button class ="a-btn-first">등록</button>

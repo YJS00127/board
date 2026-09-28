@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -23,7 +22,6 @@ public class BoardController {
                              @RequestParam(required = false) String keyword,
                              @RequestParam(defaultValue = "1") int page){
         int pageSize = 10;
-//        int pageSize = 2;
 
         int total = boardService.countBoards();
         int totalPages = (int)Math.ceil((double)total / pageSize);

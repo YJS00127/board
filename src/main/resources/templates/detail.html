@@ -8,7 +8,7 @@
 <body>
     <h1>상세 게시글</h1>
     <a class="a-btn" href="/board">목록</a>
-<form id="boardDetailContents">
+<div id="boardDetailContents">
     <div>
         <h3>제목</h3>
         <p th:text="${boardDetail.title}"></p>
@@ -30,7 +30,7 @@
         <button class="a-btn" type="button" th:onclick="|pwChk('delete', ${boardDetail.id})|">삭제</button>
         <button class="a-btn-first" type="button" th:onclick="|pwChk('updatePwChk', ${boardDetail.id})|">수정</button>
     </div>
-</form>
+</div>
     <script src="/js/board.js"></script>
 </body>
 </html>
