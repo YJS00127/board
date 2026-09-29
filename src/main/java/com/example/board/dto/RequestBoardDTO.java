@@ -9,12 +9,11 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BoardDTO {
+public class RequestBoardDTO {
     private Long id;
     private String title;
-    private String content;
     private String writer;
+    private String content;
     private String pw;
     private LocalDateTime createdAt;
-
 }

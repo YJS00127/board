@@ -3,20 +3,34 @@ function pwChk(type, id){
 
     if(pwInput === null) return;
 
-    if(type === 'delete') {
-        fetch(`/board/${id}?pw=${encodeURIComponent(pwInput)}`, {
-            method: "DELETE"
+    // if(type === 'delete') {
+    //     fetch(`/board/${id}?pw=${encodeURIComponent(pwInput)}`, {
+    //         method: "DELETE"
+    //     })
+    //         .then(response => response.json())
+    //         .then(result => {
+    //             if (result) {
+    //                 alert("게시글이 삭제되었습니다.")
+    //                 location.href = "/board";
+    //             } else {
+    //                 alert("비밀번호가 틀렸습니다.")
+    //             }
+    //         });
+    // }
+    if(type === 'delete'){
+        fetch(`/api/board/${id}`, {
+            method: 'DELETE',
+            body: JSON.stringify({
+                pw: pwInput
+            }),
+            headers: {'Content-Type' : 'application/json'}
         })
             .then(response => response.json())
-            .then(result => {
-                if (result) {
-                    alert("게시글이 삭제되었습니다.")
-                    location.href = "/board";
-                } else {
-                    alert("비밀번호가 틀렸습니다.")
-                }
-            });
-    } else if(type === 'updatePwChk'){
+            .then(data => {
+
+            })
+    }
+    else if(type === 'updatePwChk'){
         fetch(`/board/${id}/pw-chk?pw=${encodeURIComponent(pwInput)}`, {
             method: "POST"
         })

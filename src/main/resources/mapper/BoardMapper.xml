@@ -3,22 +3,27 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
-    <select id="findBoardAll" resultType="BoardDTO">
-        SELECT id, title, writer, created_at
-        FROM board
-        ORDER BY id DESC
-        LIMIT #{limit} OFFSET #{offset}
-    </select>
-    <select id="findBoardByTitle" resultType="BoardDTO">
-        SELECT id, title, writer, created_at
-        FROM board
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
-        ORDER BY id DESC
-        LIMIT #{limit} OFFSET #{offset}
-    </select>
-    <select id="findBoardById" resultType="BoardDTO">
+<!--    <select id="findBoardAll" resultType="BoardDTO">-->
+<!--        SELECT id, title, writer, created_at-->
+<!--        FROM board-->
+<!--        ORDER BY id DESC-->
+<!--        LIMIT #{limit} OFFSET #{offset}-->
+<!--    </select>-->
+<!--    <select id="findBoardByTitle" resultType="BoardDTO">-->
+<!--        SELECT id, title, writer, created_at-->
+<!--        FROM board-->
+<!--        WHERE title LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        ORDER BY id DESC-->
+<!--        LIMIT #{limit} OFFSET #{offset}-->
+<!--    </select>-->
+    <select id="findBoardById" resultType="ResponseBoardDTO">
         SELECT id,
-        title, content, writer, created_at, pw
+        title, content, writer, created_at
+        FROM board
+        WHERE id= #{id}
+    </select>
+    <select id="findBoardByIdForPw" resultType="String">
+        SELECT pw
         FROM board
         WHERE id= #{id}
     </select>

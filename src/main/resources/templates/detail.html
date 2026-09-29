@@ -8,29 +8,26 @@
 <body>
     <h1>상세 게시글</h1>
     <a class="a-btn" href="/board">목록</a>
-<div id="boardDetailContents">
     <div>
         <h3>제목</h3>
-        <p th:text="${boardDetail.title}"></p>
+        <p id="title"></p>
     </div>
     <div>
         <h3>작성자</h3>
-        <p th:text="${boardDetail.writer}"></p>
+        <p id="writer"></p>
     </div>
     <div>
         <h3>내용</h3>
-        <p th:text="${boardDetail.content}"></p>
+        <p id="content"></p>
     </div>
     <div>
         <h3>작성일자</h3>
-        <p th:text="${#temporals.format(boardDetail.createdAt, 'yyyy.MM.dd | HH:mm')}"></p>
+        <p id="createdAt"></p>
     </div>
-
     <div id="pwChk">
-        <button class="a-btn" type="button" th:onclick="|pwChk('delete', ${boardDetail.id})|">삭제</button>
-        <button class="a-btn-first" type="button" th:onclick="|pwChk('updatePwChk', ${boardDetail.id})|">수정</button>
+        <button class="a-btn" type="button" onclick=pwChk('delete')>삭제</button>
+        <button class="a-btn-first" type="button" onclick=pwChk('updatePwChk')>수정</button>
     </div>
-</div>
-    <script src="/js/board.js"></script>
+    <script src="/js/detail-test.js"></script>
 </body>
 </html>
