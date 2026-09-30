@@ -6,7 +6,6 @@
 <!--    <select id="findBoardAll" resultType="BoardDTO">-->
 <!--        SELECT id, title, writer, created_at-->
 <!--        FROM board-->
-<!--        ORDER BY id DESC-->
 <!--        LIMIT #{limit} OFFSET #{offset}-->
 <!--    </select>-->
 <!--    <select id="findBoardByTitle" resultType="BoardDTO">-->
@@ -17,8 +16,7 @@
 <!--        LIMIT #{limit} OFFSET #{offset}-->
 <!--    </select>-->
     <select id="findBoardById" resultType="ResponseBoardDTO">
-        SELECT id,
-        title, content, writer, created_at
+        SELECT id, title, content, writer, created_at
         FROM board
         WHERE id= #{id}
     </select>
@@ -33,9 +31,9 @@
     </insert>
     <update id="updateBoard">
         UPDATE board
-        SET title= #{title},
-            content= #{content},
-            writer= #{writer}
+        SET title= #{board.title},
+            content= #{board.content},
+            writer= #{board.writer}
         WHERE id= #{id}
     </update>
     <delete id="deleteBoard">

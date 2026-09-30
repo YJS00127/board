@@ -1,12 +1,11 @@
 package com.example.board.service;
 
+import com.example.board.dto.BoardUpdateRequestDTO;
 import com.example.board.mapper.BoardMapper;
-import com.example.board.dto.RequestBoardDTO;
+import com.example.board.dto.BoardDTO;
 import com.example.board.dto.ResponseBoardDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -32,13 +31,13 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int insertBoard(RequestBoardDTO board){
+    public int insertBoard(BoardDTO board){
         return boardMapper.insertBoard(board);
     }
 
     @Override
-    public int updateBoard(ResponseBoardDTO board) {
-        return boardMapper.updateBoard(board);
+    public int updateBoard(Long id, BoardUpdateRequestDTO updateRequest) {
+        return boardMapper.updateBoard(id, updateRequest);
     }
 
     @Override
@@ -48,7 +47,7 @@ public class BoardServiceImple implements BoardService{
 
     @Override
     public boolean chkPw(Long id, String pw){
-     return (boardMapper.findBoardByIdForPw(id).equals(pw));
+        return (boardMapper.findBoardByIdForPw(id).equals(pw));
     }
 
     @Override

@@ -29,7 +29,6 @@
         <th>작성시간</th>
     </tr>
     </thead>
-
     <tbody>
     <tr th:each="boardData, stat :${boardList}">
         <td class="boardNum" th:text="${stat.count} + ${((currentPage)-1)*10}"></td>

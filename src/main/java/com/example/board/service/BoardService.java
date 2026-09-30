@@ -1,7 +1,7 @@
 package com.example.board.service;
-import com.example.board.dto.RequestBoardDTO;
+import com.example.board.dto.BoardDTO;
+import com.example.board.dto.BoardUpdateRequestDTO;
 import com.example.board.dto.ResponseBoardDTO;
-import java.util.List;
 
 public interface BoardService {
     // 페이징을 포함한 게시글 목록
@@ -13,10 +13,10 @@ public interface BoardService {
     ResponseBoardDTO findBoardById(Long id);
 
     // 게시글 등록
-    int insertBoard(RequestBoardDTO board);
+    int insertBoard(BoardDTO board);
 
     //게시글 수정
-    int updateBoard(ResponseBoardDTO board);
+    int updateBoard(Long id, BoardUpdateRequestDTO board);
 
     // 게시글 삭제
     int deleteBoard(Long id, String pw);

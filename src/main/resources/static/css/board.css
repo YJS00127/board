@@ -81,12 +81,12 @@ th, td {
 
 
 /*상세 게시글 이동 css*/
-.title {
+.boardTitle {
     text-decoration-line: none;
     width: 45%;
 }
 
-.title:hover {
+.boardTitle:hover {
     text-decoration-line: underline;
 }
 
