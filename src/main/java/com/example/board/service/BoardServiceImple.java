@@ -1,11 +1,15 @@
 package com.example.board.service;
 
-import com.example.board.dto.BoardUpdateRequestDTO;
+import com.example.board.dto.*;
 import com.example.board.mapper.BoardMapper;
-import com.example.board.dto.BoardDTO;
-import com.example.board.dto.ResponseBoardDTO;
-import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
+import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -13,25 +17,27 @@ public class BoardServiceImple implements BoardService{
 
     private final BoardMapper boardMapper;
 
-//    @Override
-//    public List<ResponseBoardDTO> findBoardAll(int page, int pageSize) {
-//        int offset = (page - 1) * pageSize;
-//        return boardMapper.findBoardAll(pageSize, offset);
-//    }
-//
-//    @Override
-//    public List<ResponseBoardDTO> findBoardByTitle(String keyword, int page, int pageSize) {
-//       int offset = (page - 1) * pageSize;
-//        return boardMapper.findBoardByTitle(keyword, pageSize, offset);
-//    }
+    @Override
+    public Page<Map<String, Object>> findBoardsAll(Map<String, Object> paramMap,
+                                                   Pageable page) {
+        paramMap.put("offset", page.getOffset());
+        paramMap.put("pageSize", page.getPageSize());
+
+        String keyword = (String) paramMap.get("keyword");
+        List<Map<String, Object>> contents = boardMapper.findBoardsAll(paramMap, keyword);
+
+        int count = boardMapper.countBoards(keyword);
+
+        return new PageImpl<>(contents, page, count);
+    }
 
     @Override
-    public ResponseBoardDTO findBoardById(Long id){
+    public BoardDetailResponseDTO findBoardById(Long id){
         return boardMapper.findBoardById(id);
     }
 
     @Override
-    public int insertBoard(BoardDTO board){
+    public int insertBoard(BoardCreateRequestDTO board){
         return boardMapper.insertBoard(board);
     }
 
@@ -51,13 +57,8 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int countBoards(){
-        return boardMapper.countBoards();
-    }
-
-    @Override
-    public int countBoardsByKeyword(String keyword){
-        return boardMapper.countBoardsByKeyword(keyword);
+    public int countBoards(String keyword){
+        return boardMapper.countBoards(keyword);
     }
 
 

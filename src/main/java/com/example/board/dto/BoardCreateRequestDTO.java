@@ -1,19 +1,19 @@
 package com.example.board.dto;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @NoArgsConstructor
-public class ResponseBoardDTO {
+public class BoardCreateRequestDTO {
     private Long id;
     private String title;
     private String writer;
     private String content;
-    private String createdAt;
-
-    private Long limit;
-    private Long offset;
+    private String pw;
+    private LocalDateTime createdAt;
 }

@@ -13,6 +13,7 @@ function boardDetailOutput(id){
             }
         return response.json()})
         .then(boardDetail => {
+            console.log(boardDetail)
             title.textContent = boardDetail.title
             writer.textContent = boardDetail.writer
             content.textContent = boardDetail.content
@@ -66,5 +67,5 @@ function pwChk(type){
     }
 }
 
-let id = location.pathname.split("/").pop();
-boardDetailOutput(id);
+let id = location.pathname.split("/").pop()
+boardDetailOutput(id)

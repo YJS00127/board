@@ -8,13 +8,19 @@
 
 
 /*검색 input css*/
-.search-input {
+.search {
     border: 3px solid black;
     border-radius: 10px;
     padding: 10px 12px;
     font-size: 14px;
     margin-left: 10.5%;
     width: 400px;
+}
+
+/*등록된 게시글이 없을 때*/
+.boardEmpty {
+    margin-top: 50px;
+    margin-left: 40%;
 }
 
 
@@ -92,28 +98,17 @@ th, td {
 
 
 /*페이징 css*/
-nav{
+.pagination-container{
     display: flex;
     justify-content: center;
-}
-
-.pagination li {
-    display: inline;
-}
-
-.page-item {
-    display: block;
-    text-decoration: none;
-    padding: 10px 8px;
-    color : black;
-    line-height: 1.5;
+    margin-top: 20px;
 }
 
 .page-item.disabled {
     pointer-events: none;
 }
 
-.page-link {
+.page-previous, .page-next, .number-button {
     justify-content: center;
     display: inline-flex;
     margin-left: 3px;
@@ -127,11 +122,14 @@ nav{
     text-decoration-line: none;
 }
 
-.page-link:hover{
+.page-previous:hover, .page-next:hover{
     text-decoration-line: underline;
+    color: blue;
 }
 
-.page-item.active .page-link {
-    box-shadow: inset 0 0 0 2px black;
-    text-decoration-line: none;
+.number-button.active, .number-button:hover {
+    background-color: black;
+    color: white;
+    /*box-shadow: inset 0 0 0 2px black;*/
+    /*text-decoration-line: none;*/
 }

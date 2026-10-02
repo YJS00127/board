@@ -21,9 +21,7 @@ public class BoardViewController {
     }
 
     @GetMapping("/detail/{id}")
-    public String boardDetail(){
-        return "detail";
-    }
+    public String boardDetail(){ return "detail"; }
 
     @GetMapping("/update/{id}")
     public String boardUpdate(){

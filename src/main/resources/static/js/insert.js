@@ -16,6 +16,7 @@ function insertContents(){
     })
         .then(response => response.json())
         .then(result => {
+            console.log(result)
             if(result>0){
                 alert('게시물을 등록하였습니다.')
                 location.href='/board'

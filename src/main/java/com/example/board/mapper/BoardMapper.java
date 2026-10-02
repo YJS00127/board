@@ -1,25 +1,21 @@
 package com.example.board.mapper;
 
-import com.example.board.dto.BoardDTO;
-import com.example.board.dto.BoardUpdateRequestDTO;
-import com.example.board.dto.ResponseBoardDTO;
+import com.example.board.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BoardMapper {
-    List<ResponseBoardDTO> findBoardAll(@Param("limit") int limit, @Param("offset") int offset);
-    List<ResponseBoardDTO> findBoardByTitle(@Param("keyword") String keyword,
-                                           @Param("limit") int limit,
-                                           @Param("offset") int offset);
+    List<Map<String, Object>> findBoardsAll(@Param("paramMap") Map<String, Object> paramMap,@Param("keyword") String keyword);
     String findBoardByIdForPw(Long id);
-    int countBoards();
-    int countBoardsByKeyword(String keyword);
+    int countBoards(String keyword);
 
-    ResponseBoardDTO findBoardById(Long id);
-    int insertBoard(BoardDTO board);
+    BoardDetailResponseDTO findBoardById(@Param("id") Long id);
+
+    int insertBoard(@Param("board") BoardCreateRequestDTO board);
     int updateBoard(@Param("id") Long id, @Param("board") BoardUpdateRequestDTO board);
     int deleteBoard(@Param("id") Long id,@Param("pw") String pw);
 }

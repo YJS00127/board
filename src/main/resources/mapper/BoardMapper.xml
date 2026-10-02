@@ -3,22 +3,20 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
-<!--    <select id="findBoardAll" resultType="BoardDTO">-->
-<!--        SELECT id, title, writer, created_at-->
-<!--        FROM board-->
-<!--        LIMIT #{limit} OFFSET #{offset}-->
-<!--    </select>-->
-<!--    <select id="findBoardByTitle" resultType="BoardDTO">-->
-<!--        SELECT id, title, writer, created_at-->
-<!--        FROM board-->
-<!--        WHERE title LIKE CONCAT('%', #{keyword}, '%')-->
-<!--        ORDER BY id DESC-->
-<!--        LIMIT #{limit} OFFSET #{offset}-->
-<!--    </select>-->
-    <select id="findBoardById" resultType="ResponseBoardDTO">
-        SELECT id, title, content, writer, created_at
+    <select id="findBoardsAll">
+        SELECT id, title, writer, created_at
         FROM board
-        WHERE id= #{id}
+            <where>
+                <if test = "keyword != null and keyword != ''">
+                title LIKE CONCAT('%', #{keyword}, '%')
+                </if>
+            </where>
+        LIMIT #{paramMap.offset}, #{paramMap.pageSize}
+    </select>
+    <select id="findBoardById">
+        SELECT title, writer, content, created_at
+        FROM board
+        WHERE id = #{id}
     </select>
     <select id="findBoardByIdForPw" resultType="String">
         SELECT pw
@@ -27,7 +25,7 @@
     </select>
     <insert id="insertBoard">
         INSERT INTO board(title, content, writer, pw)
-        VALUES(#{title}, #{content}, #{writer}, #{pw})
+        VALUES (#{board.title}, #{board.content}, #{board.writer}, #{board.pw})
     </insert>
     <update id="updateBoard">
         UPDATE board
@@ -43,11 +41,12 @@
 
 <!--    페이지네이션-->
     <select id="countBoards" resultType="int">
-        SELECT COUNT(*) FROM board
-    </select>
-
-    <select id="countBoardsByKeyword" resultType="int">
-        SELECT COUNT(*) FROM board
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        SELECT COUNT(*)
+        FROM board
+        <where>
+        <if test="keyword != null and keyword != ''">
+            title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        </where>
     </select>
 </mapper>
