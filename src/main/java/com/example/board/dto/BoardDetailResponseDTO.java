@@ -13,7 +13,4 @@ public class BoardDetailResponseDTO {
     private String writer;
     private String content;
     private String createdAt;
-
-    private Long limit;
-    private Long offset;
 }

@@ -104,11 +104,12 @@ th, td {
     margin-top: 20px;
 }
 
-.page-item.disabled {
+.prev-button.disabled, .next-button.disabled,
+.prev-button.disabled:hover, .next-button.disabled:hover {
     pointer-events: none;
 }
 
-.page-previous, .page-next, .number-button {
+.prev-button, .next-button, .number-button {
     justify-content: center;
     display: inline-flex;
     margin-left: 3px;
@@ -122,14 +123,16 @@ th, td {
     text-decoration-line: none;
 }
 
-.page-previous:hover, .page-next:hover{
+.prev-button:hover, .next-button:hover{
     text-decoration-line: underline;
     color: blue;
 }
 
-.number-button.active, .number-button:hover {
+.number-button.selected, .number-button:hover {
     background-color: black;
     color: white;
-    /*box-shadow: inset 0 0 0 2px black;*/
-    /*text-decoration-line: none;*/
+}
+
+.prev-button:hover, .number-button:hover, .next-button:hover {
+    cursor: pointer;
 }
