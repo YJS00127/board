@@ -97,19 +97,17 @@ th, td {
 }
 
 
-/*페이징 css*/
-.pagination-container{
+/* 페이징 css */
+
+/* 페이징 div */
+.pagination-container {
     display: flex;
     justify-content: center;
     margin-top: 20px;
 }
 
-.prev-button.disabled, .next-button.disabled,
-.prev-button.disabled:hover, .next-button.disabled:hover {
-    pointer-events: none;
-}
-
-.prev-button, .next-button, .number-button {
+/* 페이징 버튼 공통 CSS */
+.number-button, .prev-page-button, .prev-pageGroup-button,.next-page-button, .next-pageGroup-button {
     justify-content: center;
     display: inline-flex;
     margin-left: 3px;
@@ -123,16 +121,15 @@ th, td {
     text-decoration-line: none;
 }
 
-.prev-button:hover, .next-button:hover{
-    text-decoration-line: underline;
-    color: blue;
+/* 버튼 마우스 올릴 시 공통 */
+.number-button:hover,
+.prev-page-button:hover, .prev-pageGroup-button:hover,
+.next-page-button:hover, .next-pageGroup-button:hover{
+    cursor: pointer;
 }
 
-.number-button.selected, .number-button:hover {
+/* 선택된 페이지 번호 CSS */
+.number-button.selected {
     background-color: black;
     color: white;
-}
-
-.prev-button:hover, .number-button:hover, .next-button:hover {
-    cursor: pointer;
 }

@@ -18,11 +18,12 @@ async function LoadData(){
         .then(data => {
             boardList = data.pages.content;
             pageInfo = data.pages;
+            console.log(pageInfo)
+            console.log(data.pageGroup)
 
             BoardListOutPut()
-            Pagination(pageInfo.number)
+            Pagination(pageInfo.number, data.pageGroup)
         })
-
 }
 
 // 게시글 검색
@@ -41,7 +42,7 @@ function searchKeyword() {
 // 게시글 출력
 function BoardListOutPut() {
     const tbody = document.querySelector("tbody");
-    let boardNumber = pageInfo.number*10;
+    let boardNumber = pageInfo.number*(pageInfo.size);
     tbody.innerHTML = ``;
     boardList.forEach(data => {
         const tr = document.createElement('tr');
@@ -59,16 +60,18 @@ function BoardListOutPut() {
 }
 
 // 페이지네이션 (페이지 생성, 클릭 시 이동 이벤트)
-function Pagination(currentPage) {
+function Pagination(currentPage, pageGroup) {
 
     // 페이지 생성
     const setPageButtons = () => {
-        const totalPages = pageInfo.totalPages;
-
         const numberButtonWrapper = document.querySelector('.number-button-wrapper');
         numberButtonWrapper.innerHTML = '';
 
-        for (let i = 1; i <= totalPages; i++) {
+        const firstPage = (pageGroup - 1) * 10 + 1;
+        const lastPage = Math.min(pageGroup * 10, pageInfo.totalPages);
+
+        for (let i = firstPage; i <= lastPage; i++) {
+            if(pageInfo.empty === true) return;
             numberButtonWrapper.innerHTML += `<span class="number-button">${i}</span>`;
         }
     }
@@ -76,8 +79,6 @@ function Pagination(currentPage) {
     // 페이지 번호 클릭 이벤트
     const PageButtonsEvent = () => {
         pageNumberButtons = document.querySelectorAll('.number-button');
-
-        const params = new URLSearchParams();
 
         pageNumberButtons.forEach((numberButton) => {
             numberButton.addEventListener('click', (e) => {
@@ -91,31 +92,62 @@ function Pagination(currentPage) {
         })
     }
 
-    // 이전, 다음 클릭 이벤트
-    const prevNextButton = () => {
-        const prev = document.querySelector('.prev-button');
-        const next = document.querySelector('.next-button');
+    // 이전, 다음 페이지 이동
+    const pageMoveButton = () => {
+        const prev = document.querySelector('.prev-page-button');
+        const next = document.querySelector('.next-page-button');
 
         prev.addEventListener('click', (e) => {
-            if(currentPage === 0){
-                prev.classList.contains('disabled');
-            } else{
-                location.href = `/board?page=${currentPage - 1}`;
+            if(currentPage !== 0){
+                if(keyword !== '' && keyword !== null){
+                    location.href = `/board?keyword=${keyword}&page=${currentPage - 1}`;
+                } else{
+                    location.href = `/board?page=${currentPage - 1}`;
+                }
             }
         })
 
         next.addEventListener('click', (e) => {
-            if(currentPage === (pageInfo.totalPages-1)){
-                next.classList.contains('disabled');
-            } else{
-                location.href = `/board?page=${currentPage + 1}`;
+            if(currentPage !== pageInfo.totalPages - 1){
+                if(keyword !== '' && keyword !== null) {
+                    location.href = `/board?keyword=${keyword}&page=${currentPage + 1}`;
+                } else{
+                    location.href = `/board?page=${currentPage + 1}`;
+                }
+            }
+        })
+    }
+
+    // 이전 페이지 그룹 (<) , 다음 페이지 그룹 (>) 이동
+    const pageGroupMoveButton = () => {
+        const prevGroup= document.querySelector('.prev-pageGroup-button');
+        const nextGroup = document.querySelector('.next-pageGroup-button');
+
+        prevGroup.addEventListener('click', (e) => {
+            if(pageGroup !== 1){
+                if(keyword !== '' && keyword !== null){
+                    location.href = `/board?keyword=${keyword}&page=${(pageGroup-2)*10}`;
+                } else{
+                    location.href = `/board?page=${(pageGroup-2)*10}`;
+                }
+            }
+        })
+
+        nextGroup.addEventListener('click', (e) => {
+            if(pageGroup !== Math.ceil(pageInfo.totalPages/10)){
+                if(keyword !== '' && keyword !== null) {
+                    location.href = `/board?keyword=${keyword}&page=${(pageGroup)*10}`;
+                } else{
+                    location.href = `/board?page=${(pageGroup)*10}`;
+                }
             }
         })
     }
 
     setPageButtons();
     PageButtonsEvent();
-    prevNextButton();
+    pageMoveButton();
+    pageGroupMoveButton();
 
     pageNumberButtons.forEach((numberButton) => {
         if (numberButton.classList.contains('selected')){
@@ -123,7 +155,8 @@ function Pagination(currentPage) {
         }
     })
 
-    pageNumberButtons[currentPage].classList.add('selected');
+    pageNumberButtons[currentPage%10].classList.add('selected');
+
 
 }
 
