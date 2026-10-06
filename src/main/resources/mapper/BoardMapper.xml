@@ -12,7 +12,6 @@
                 </if>
             </where>
         ORDER BY id DESC
-
         LIMIT #{paramMap.offset}, #{paramMap.pageSize}
     </select>
     <select id="findBoardById">

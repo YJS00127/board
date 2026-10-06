@@ -22,7 +22,7 @@ public class BoardAPIController {
 
     @GetMapping
     public ResponseEntity<Object> boardList(@RequestParam Map<String, Object> paramMap,
-                                            @PageableDefault(value=2) Pageable page){
+                                            @PageableDefault(value=10) Pageable page){
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Page<Map<String, Object>> result = boardService.findBoardsAll(paramMap, page);
         int pageGroup = (int) Math.ceil(((double)result.getNumber()+1) / 10);

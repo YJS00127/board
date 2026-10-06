@@ -1,15 +1,13 @@
-const title = document.getElementById("title")
-const writer = document.getElementById('writer')
-const content = document.getElementById('content')
-
 // 수정 전 게시글 데이터
 function boardContentOutput(id) {
+
+    const title = document.getElementById("title")
+    const writer = document.getElementById('writer')
+    const content = document.getElementById('content')
 
     fetch(`/api/board/detail/${id}`)
         .then(response => response.json())
         .then(boardDetail => {
-            console.log(boardDetail)
-            console.log(title.textContent)
             title.value = boardDetail.title
             writer.value = boardDetail.writer
             content.value = boardDetail.content
@@ -17,7 +15,7 @@ function boardContentOutput(id) {
 }
 
 // 게시글 데이터 수정
-function updateContent(){
+const updateContent = () => {
     const title = document.getElementById("title").value
     const writer = document.getElementById('writer').value
     const content = document.getElementById('content').value
@@ -44,9 +42,8 @@ function updateContent(){
         })
 }
 
-function updateCancel(){
+const updateCancel = () => {
     location.href=`/board/detail/` + id
 }
 
-let id = location.pathname.split("/").pop()
 boardContentOutput(id)

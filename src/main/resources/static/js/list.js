@@ -5,7 +5,7 @@ let page;
 let keyword;
 
 // 데이터 로딩 후 출력
-async function LoadData(){
+async function loadData(){
     searchKeyword()
     const params = new URLSearchParams(location.search);
 
@@ -21,8 +21,8 @@ async function LoadData(){
             console.log(pageInfo)
             console.log(data.pageGroup)
 
-            BoardListOutPut()
-            Pagination(pageInfo.number, data.pageGroup)
+            boardListOutPut()
+            pagination(pageInfo.number, data.pageGroup)
         })
 }
 
@@ -40,7 +40,7 @@ function searchKeyword() {
 }
 
 // 게시글 출력
-function BoardListOutPut() {
+function boardListOutPut() {
     const tbody = document.querySelector("tbody");
     let boardNumber = pageInfo.number*(pageInfo.size);
     tbody.innerHTML = ``;
@@ -60,7 +60,7 @@ function BoardListOutPut() {
 }
 
 // 페이지네이션 (페이지 생성, 클릭 시 이동 이벤트)
-function Pagination(currentPage, pageGroup) {
+function pagination(currentPage, pageGroup) {
 
     // 페이지 생성
     const setPageButtons = () => {
@@ -77,7 +77,7 @@ function Pagination(currentPage, pageGroup) {
     }
 
     // 페이지 번호 클릭 이벤트
-    const PageButtonsEvent = () => {
+    const pageButtonsEvent = () => {
         pageNumberButtons = document.querySelectorAll('.number-button');
 
         pageNumberButtons.forEach((numberButton) => {
@@ -145,7 +145,7 @@ function Pagination(currentPage, pageGroup) {
     }
 
     setPageButtons();
-    PageButtonsEvent();
+    pageButtonsEvent();
     pageMoveButton();
     pageGroupMoveButton();
 
@@ -160,4 +160,4 @@ function Pagination(currentPage, pageGroup) {
 
 }
 
-LoadData();
+loadData();

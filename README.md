@@ -4,7 +4,6 @@
 게시물 등록, 상세, 수정, 삭제가 가능한 비회원 기반의 게시판
 
 ---
-
 ## 기술 스택
 ### 프론트엔드
 Thymeleaf
@@ -20,20 +19,32 @@ H2 내장 DB
 ### DB관리
 MyBatis(3.0.5)
 
----
+### 데이터 송수신
+REST API
 
+---
 ## API 명세
 
+View 이동 API (BoardViewController)
 
-| HTTP    | URL                    | 설명                    |
-|---------|------------------------|-------------------------|
-| GET     | /board/list            | 게시판 목록 조회        |
-| GET     | /board/list?keyword=   | 게시판 목록 검색 (제목) |
-| GET     | /board/detail/{id}     | 게시글 조회             |
-| POST    | /board                 | 게시글 등록             |
-| PUT     | /board/{id}            | 게시글 수정             |
-| DELETE  | /board/{id}            | 게시글 삭제             |
+| HTTP    | URL                          | 설명                         |
+|---------|------------------------------|------------------------------|
+| GET     | /board/list?keyword=&page=   | 게시판 목록 조회 페이지 이동 |
+| GET     | /board/detail/{id}           | 게시글 조회 페이지 이동      |
+| POST    | /board                       | 게시글 등록 페이지 이동      |
+| PUT     | /board/{id}                  | 게시글 수정 페이지 이동      |
+| DELETE  | /board/{id}                  | 게시글 삭제 페이지 이동      |
 
+
+REST API (BoardAPIController)
+
+| HTTP    | URL                         | 설명                                       |
+|---------|-----------------------------|--------------------------------------------|
+| GET     | /api/board?keyword=&page=   | keyword, page 기반 게시판 목록 데이터 조회 |
+| GET     | /api/board/detail/{id}      | 게시글 상세 데이터 조회                    |
+| POST    | /api/board                  | 게시글 등록                                |
+| PUT     | /api/board/{id}             | 게시글 수정                                |
+| DELETE  | /api/board/{id}             | 게시글 삭제                                |
 ---
 
 ## 파일 구성
@@ -48,10 +59,13 @@ MyBatis(3.0.5)
 |   |               |   BoardApplication.java
 |   |               |
 |   |               +---controller
-|   |               |       BoardController.java
+|   |               |       BoardViewController.java
+|   |               |       BoardAPIController.java
 |   |               |
 |   |               +---dto
-|   |               |       BoardDTO.java
+|   |               |       BoardCreateRequestDTO.java
+|   |               |       BoardDetailResponse.java
+|   |               |       BoardUpdateRequest.java
 |   |               |
 |   |               +---mapper
 |   |               |       BoardMapper.java
@@ -66,6 +80,12 @@ MyBatis(3.0.5)
 |       |
 |       +---css
 |       |       board.css
+|       |
+|       +---js
+|       |       detail.js
+|       |       insert.js
+|       |       list.js
+|       |       update.js
 |       |
 |       +---mapper
 |       |       BoardMapper.xml
