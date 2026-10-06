@@ -1,28 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org"><head>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
     <meta charset="UTF-8">
     <title>게시글 수정</title>
     <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
-    <h1>게시글 수정</h1>
-    <a class="a-btn" href="/board">목록</a>
-    <form th:action="@{/board/{id}(id=${boardDetail.id})}" method="post">
-        <input type="hidden" name="_method" value="put">
-
-        <label for="title">제목</label>
-        <input type="text" id="title" name="title"
-               th:value="${boardDetail.title}" required><br>
-        <label for="writer">작성자</label>
-        <input type="text" id="writer" name="writer"
-               th:value="${boardDetail.writer}" required><br>
-        <label for="content">내용</label>
-        <input type="text" id="content" name="content"
-               th:value="${boardDetail.content}" required><br>
-        <div>
-            <a class ="a-btn" th:href="@{/board/detail/{id}(id=${boardDetail.id})}">취소</a>
-            <button class ="a-btn-first">수정</button>
-        </div>
-    </form>
+<h1>게시글 수정</h1>
+<a class="a-btn" href="/board">목록</a>
+<label for="title">제목</label>
+<input type="text" id="title"
+       value="title" placeholder="제목을 입력해주세요." required><br>
+<label for="writer">작성자</label>
+<input type="text" id="writer"
+       value="writer" placeholder="작성자를 입력해주세요." required><br>
+<label for="content">내용</label>
+<input type="text" id="content"
+       value="content" placeholder="내용을 입력해주세요." required><br>
+<div>
+    <a class ="a-btn" onclick=updateCancel()>취소</a>
+    <button class ="a-btn-first" onclick=updateContent()>수정</button>
+    </div>
+<script src="/js/update.js"></script>
 </body>
 </html>

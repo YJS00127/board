@@ -3,34 +3,37 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
-    <select id="findBoardAll" resultType="BoardDTO">
+    <select id="findBoardsAll">
         SELECT id, title, writer, created_at
         FROM board
+            <where>
+                <if test = "keyword != null and keyword != ''">
+                title LIKE CONCAT('%', #{keyword}, '%')
+                </if>
+            </where>
         ORDER BY id DESC
-        LIMIT #{limit} OFFSET #{offset}
+
+        LIMIT #{paramMap.offset}, #{paramMap.pageSize}
     </select>
-    <select id="findBoardByTitle" resultType="BoardDTO">
-        SELECT id, title, writer, created_at
+    <select id="findBoardById">
+        SELECT title, writer, content, created_at
         FROM board
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
-        ORDER BY id DESC
-        LIMIT #{limit} OFFSET #{offset}
+        WHERE id = #{id}
     </select>
-    <select id="findBoardById" resultType="BoardDTO">
-        SELECT id,
-        title, content, writer, created_at, pw
+    <select id="findBoardByIdForPw" resultType="String">
+        SELECT pw
         FROM board
         WHERE id= #{id}
     </select>
     <insert id="insertBoard">
         INSERT INTO board(title, content, writer, pw)
-        VALUES(#{title}, #{content}, #{writer}, #{pw})
+        VALUES (#{board.title}, #{board.content}, #{board.writer}, #{board.pw})
     </insert>
     <update id="updateBoard">
         UPDATE board
-        SET title= #{title},
-            content= #{content},
-            writer= #{writer}
+        SET title= #{board.title},
+            content= #{board.content},
+            writer= #{board.writer}
         WHERE id= #{id}
     </update>
     <delete id="deleteBoard">
@@ -40,11 +43,12 @@
 
 <!--    페이지네이션-->
     <select id="countBoards" resultType="int">
-        SELECT COUNT(*) FROM board
-    </select>
-
-    <select id="countBoardsByKeyword" resultType="int">
-        SELECT COUNT(*) FROM board
-        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+        SELECT COUNT(*)
+        FROM board
+        <where>
+        <if test="keyword != null and keyword != ''">
+            title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        </where>
     </select>
 </mapper>

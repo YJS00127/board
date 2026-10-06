@@ -8,13 +8,19 @@
 
 
 /*검색 input css*/
-.search-input {
+.search {
     border: 3px solid black;
     border-radius: 10px;
     padding: 10px 12px;
     font-size: 14px;
     margin-left: 10.5%;
     width: 400px;
+}
+
+/*등록된 게시글이 없을 때*/
+.boardEmpty {
+    margin-top: 50px;
+    margin-left: 40%;
 }
 
 
@@ -81,39 +87,27 @@ th, td {
 
 
 /*상세 게시글 이동 css*/
-.title {
+.boardTitle {
     text-decoration-line: none;
     width: 45%;
 }
 
-.title:hover {
+.boardTitle:hover {
     text-decoration-line: underline;
 }
 
 
-/*페이징 css*/
-nav{
+/* 페이징 css */
+
+/* 페이징 div */
+.pagination-container {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
 }
 
-.pagination li {
-    display: inline;
-}
-
-.page-item {
-    display: block;
-    text-decoration: none;
-    padding: 10px 8px;
-    color : black;
-    line-height: 1.5;
-}
-
-.page-item.disabled {
-    pointer-events: none;
-}
-
-.page-link {
+/* 페이징 버튼 공통 CSS */
+.number-button, .prev-page-button, .prev-pageGroup-button,.next-page-button, .next-pageGroup-button {
     justify-content: center;
     display: inline-flex;
     margin-left: 3px;
@@ -127,11 +121,15 @@ nav{
     text-decoration-line: none;
 }
 
-.page-link:hover{
-    text-decoration-line: underline;
+/* 버튼 마우스 올릴 시 공통 */
+.number-button:hover,
+.prev-page-button:hover, .prev-pageGroup-button:hover,
+.next-page-button:hover, .next-pageGroup-button:hover{
+    cursor: pointer;
 }
 
-.page-item.active .page-link {
-    box-shadow: inset 0 0 0 2px black;
-    text-decoration-line: none;
+/* 선택된 페이지 번호 CSS */
+.number-button.selected {
+    background-color: black;
+    color: white;
 }
