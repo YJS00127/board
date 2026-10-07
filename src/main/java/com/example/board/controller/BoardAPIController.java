@@ -1,8 +1,6 @@
 package com.example.board.controller;
 
-import com.example.board.dto.BoardCreateRequestDTO;
-import com.example.board.dto.BoardUpdateRequestDTO;
-import com.example.board.dto.BoardDetailResponseDTO;
+import com.example.board.dto.*;
 import com.example.board.service.BoardService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -21,15 +19,9 @@ public class BoardAPIController {
     private final BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<Object> boardList(Map<String, Object> paramMap,
-                                            @PageableDefault(value=10) Pageable page){
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        Page<Map<String, Object>> result = boardService.findBoardsAll(paramMap, page);
-        int pageGroup = (int) Math.ceil(((double)result.getNumber()+1) / 10);
-        resultMap.put("pages", result);
-        resultMap.put("pageGroup", pageGroup);
-
-        return ResponseEntity.ok().body(resultMap);
+    public ResponseEntity<Page<BoardListResponseDTO>> boardList(BoardListRequestDTO listDTO,
+                                                          @PageableDefault(value=10) Pageable page){
+        return ResponseEntity.ok(boardService.findBoardsAll(listDTO, page));
     }
 
     @GetMapping("/detail/{id}")

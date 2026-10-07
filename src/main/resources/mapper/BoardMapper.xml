@@ -7,12 +7,13 @@
         SELECT id, title, writer, created_at
         FROM board
             <where>
-                <if test = "keyword != null and keyword != ''">
-                title LIKE CONCAT('%', #{keyword}, '%')
+                <if test = "listDTO.keyword != null and listDTO.keyword != ''">
+                title LIKE CONCAT('%', #{listDTO.keyword}, '%')
                 </if>
             </where>
         ORDER BY id DESC
-        LIMIT #{paramMap.offset}, #{paramMap.pageSize}
+        LIMIT #{listDTO.pageSize}
+        OFFSET #{listDTO.offset}
     </select>
     <select id="findBoardById">
         SELECT title, writer, content, created_at
@@ -26,13 +27,13 @@
     </select>
     <insert id="insertBoard">
         INSERT INTO board(title, content, writer, pw)
-        VALUES (#{board.title}, #{board.content}, #{board.writer}, #{board.pw})
+        VALUES (#{createBoard.title}, #{createBoard.content}, #{createBoard.writer}, #{createBoard.pw})
     </insert>
     <update id="updateBoard">
         UPDATE board
-        SET title= #{board.title},
-            content= #{board.content},
-            writer= #{board.writer}
+        SET title= #{updateBoard.title},
+            content= #{updateBoard.content},
+            writer= #{updateBoard.writer}
         WHERE id= #{id}
     </update>
     <delete id="deleteBoard">

@@ -18,17 +18,14 @@ public class BoardServiceImple implements BoardService{
     private final BoardMapper boardMapper;
 
     @Override
-    public Page<Map<String, Object>> findBoardsAll(Map<String, Object> paramMap,
-                                                   Pageable page) {
-        paramMap.put("offset", page.getOffset());
-        paramMap.put("pageSize", page.getPageSize());
+    public Page<BoardListResponseDTO> findBoardsAll(BoardListRequestDTO listDTO, Pageable page) {
+        listDTO.setOffset(page.getOffset());
+        listDTO.setPageSize(page.getPageSize());
 
-        String keyword = (String) paramMap.get("keyword");
-        List<Map<String, Object>> contents = boardMapper.findBoardsAll(paramMap, keyword);
+        List<BoardListResponseDTO> contents = boardMapper.findBoardsAll(listDTO);
+        int totalElements = boardMapper.countBoards(listDTO.getKeyword());
+        return new PageImpl<>(contents, page, totalElements);
 
-        int count = boardMapper.countBoards(keyword);
-
-        return new PageImpl<>(contents, page, count);
     }
 
     @Override
@@ -37,13 +34,13 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int insertBoard(BoardCreateRequestDTO board){
-        return boardMapper.insertBoard(board);
+    public int insertBoard(BoardCreateRequestDTO createBoard){
+        return boardMapper.insertBoard(createBoard);
     }
 
     @Override
-    public int updateBoard(Long id, BoardUpdateRequestDTO updateRequest) {
-        return boardMapper.updateBoard(id, updateRequest);
+    public int updateBoard(Long id, BoardUpdateRequestDTO updateBoard) {
+        return boardMapper.updateBoard(id, updateBoard);
     }
 
     @Override
