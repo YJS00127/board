@@ -8,8 +8,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface BoardService {
     // 페이징을 포함한 게시글 목록
-    Page<Map<String, Object>> findBoardsAll(Map<String, Object> paramMap,
-                                            Pageable page);
+    Page<Map<String, Object>> findBoardsAll(Map<String, Object> paramMap, Pageable page);
 
     // 상세 게시글
     BoardDetailResponseDTO findBoardById(Long id);
@@ -25,7 +24,4 @@ public interface BoardService {
 
     // 게시글 수정, 삭제를 위한 비밀번호 확인
     boolean chkPw(Long id, String pw);
-
-    // pageSize를 위한 전체 게시글 수
-    int countBoards(String keyword);
 }

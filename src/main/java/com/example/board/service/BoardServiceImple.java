@@ -55,11 +55,4 @@ public class BoardServiceImple implements BoardService{
     public boolean chkPw(Long id, String pw){
         return (boardMapper.findBoardByIdForPw(id).equals(pw));
     }
-
-    @Override
-    public int countBoards(String keyword){
-        return boardMapper.countBoards(keyword);
-    }
-
-
 }

@@ -15,7 +15,7 @@ public interface BoardMapper {
 
     BoardDetailResponseDTO findBoardById(@Param("id") Long id);
 
-    int insertBoard(@Param("board") BoardCreateRequestDTO board);
-    int updateBoard(@Param("id") Long id, @Param("board") BoardUpdateRequestDTO board);
+    int insertBoard(@Param("createdBoard") BoardCreateRequestDTO createBoard);
+    int updateBoard(@Param("id") Long id, @Param("updateBoard") BoardUpdateRequestDTO updateBoard);
     int deleteBoard(@Param("id") Long id,@Param("pw") String pw);
 }

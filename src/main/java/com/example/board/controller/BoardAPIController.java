@@ -21,7 +21,7 @@ public class BoardAPIController {
     private final BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<Object> boardList(@RequestParam Map<String, Object> paramMap,
+    public ResponseEntity<Object> boardList(Map<String, Object> paramMap,
                                             @PageableDefault(value=10) Pageable page){
         Map<String, Object> resultMap = new HashMap<String, Object>();
         Page<Map<String, Object>> result = boardService.findBoardsAll(paramMap, page);
@@ -29,8 +29,7 @@ public class BoardAPIController {
         resultMap.put("pages", result);
         resultMap.put("pageGroup", pageGroup);
 
-        return ResponseEntity.ok()
-                .body(resultMap);
+        return ResponseEntity.ok().body(resultMap);
     }
 
     @GetMapping("/detail/{id}")
@@ -43,28 +42,28 @@ public class BoardAPIController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> boardInsert(@RequestBody BoardCreateRequestDTO board){
-        return ResponseEntity.ok(boardService.insertBoard(board));
+    public ResponseEntity<Integer> boardInsert(@RequestBody BoardCreateRequestDTO requestDTO){
+        return ResponseEntity.ok(boardService.insertBoard(requestDTO));
     }
 
     // 비밀번호 확인
     @PostMapping("/pw-chk/{id}")
     public ResponseEntity<Boolean> pwChk(@PathVariable Long id,
-                                         @RequestBody BoardCreateRequestDTO request){
-        String pw = request.getPw();
+                                         @RequestBody BoardCreateRequestDTO requestDTO){
+        String pw = requestDTO.getPw();
         return ResponseEntity.ok(boardService.chkPw(id, pw));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Integer> boardUpdate(@PathVariable Long id,
-                                               @RequestBody BoardUpdateRequestDTO updateRequest){
-        return ResponseEntity.ok(boardService.updateBoard(id, updateRequest));
+                                               @RequestBody BoardUpdateRequestDTO requestDTO){
+        return ResponseEntity.ok(boardService.updateBoard(id, requestDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Integer> boardDelete(@PathVariable Long id,
-                                                @RequestBody BoardCreateRequestDTO request){
-        String pw = request.getPw();
+                                                @RequestBody BoardCreateRequestDTO requestDTO){
+        String pw = requestDTO.getPw();
         return ResponseEntity.ok(boardService.deleteBoard(id, pw));
     }
 

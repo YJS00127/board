@@ -1,16 +1,14 @@
 let boardList = [];
 let pageInfo = {};
 let pageNumberButtons;
-let page;
-let keyword;
 
 // 데이터 로딩 후 출력
 async function loadData(){
     searchKeyword()
     const params = new URLSearchParams(location.search);
 
-    page = params.get('page') ?? 0;
-    keyword = params.get('keyword') ?? '';
+    const page = params.get('page') ?? 0;
+    const keyword = params.get('keyword') ?? '';
 
 
     await fetch(`/api/board?keyword=${keyword}&page=${page}`)
@@ -22,7 +20,7 @@ async function loadData(){
             console.log(data.pageGroup)
 
             boardListOutPut()
-            pagination(pageInfo.number, data.pageGroup)
+            pagination(pageInfo.number, data.pageGroup, page, keyword)
         })
 }
 
@@ -60,7 +58,7 @@ function boardListOutPut() {
 }
 
 // 페이지네이션 (페이지 생성, 클릭 시 이동 이벤트)
-function pagination(currentPage, pageGroup) {
+function pagination(currentPage, pageGroup, page, keyword) {
 
     // 페이지 생성
     const setPageButtons = () => {
@@ -82,7 +80,6 @@ function pagination(currentPage, pageGroup) {
 
         pageNumberButtons.forEach((numberButton) => {
             numberButton.addEventListener('click', (e) => {
-                const page = e.target.innerHTML;
                 if(keyword !== '' && keyword !== null) {
                     location.href = `/board?keyword=${keyword}&page=${page - 1}`;
                 } else{
