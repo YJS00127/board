@@ -3,27 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>게시글 작성</title>
-    <link rel="Stylesheet" th:href="@{/css/board.css}">
+    <link rel="Stylesheet" th:href="@{/css/button.css}">
+    <link rel="Stylesheet" th:href="@{/css/insert.css}">
 </head>
 <body>
-    <div>
-        <h1>게시글 작성</h1>
-        <a class="a-btn" href="/board">목록</a>
+<div class="insert-title">
+    <h1>게시글 작성</h1><br>
+</div>
+<a class="a-btn" href="/board">목록</a>
+<form>
+    <div class="insert-content">
+    <label for="title">제목</label>
+    <input type="text" id='title' class="title"
+           placeholder="제목을 입력하세요" required>
+    <label for="writer">작성자</label>
+    <input type="text" id="writer" class="writer"
+           placeholder="작성자를 입력하세요" required>
+    <label for="content">내용</label>
+    <textarea id="content" class="content"
+           placeholder="내용을 입력하세요" required></textarea>
+    <label for="pw">비밀번호</label>
+    <input type="password" id="pw" class="pw"
+              placeholder="비밀번호를 입력하세요" required>
     </div>
-    <form>
-        <label for="title">제목</label>
-        <input type="text" id='title'
-               placeholder="제목을 입력하세요" required><br>
-        <label for="writer">작성자</label>
-        <input type="text" id="writer"
-               placeholder="작성자를 입력하세요" required><br>
-        <label for="content">내용</label>
-        <input type="text" id="content"
-               placeholder="내용을 입력하세요" required><br>
-        <label for="pw">비밀번호</label>
-        <input type="password" id="pw"
-               placeholder="비밀번호를 입력하세요" required><br>
-
         <button class ="a-btn" type="reset">초기화</button>
         <button class ="a-btn-first" type= "button" onclick=insertContents()>등록</button>
     </form>

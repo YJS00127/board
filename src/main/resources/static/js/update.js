@@ -1,3 +1,5 @@
+const id = location.pathname.split('/').pop()
+
 // 수정 전 게시글 데이터
 function boardContentOutput(id) {
 
@@ -15,12 +17,12 @@ function boardContentOutput(id) {
 }
 
 // 게시글 데이터 수정
-const updateContent = () => {
+const updateContent = (id) => {
     const title = document.getElementById("title").value
     const writer = document.getElementById('writer').value
     const content = document.getElementById('content').value
 
-    fetch(`/api/board/` + id, {
+    fetch(`/api/board/`+id, {
         method: "PUT",
         body: JSON.stringify({
             title,
@@ -42,7 +44,7 @@ const updateContent = () => {
         })
 }
 
-const updateCancel = () => {
+const updateCancel = (id) => {
     location.href=`/board/detail/` + id
 }
 

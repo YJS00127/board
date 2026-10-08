@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @Setter
 public class BoardDetailResponseDTO {
-    private Long id;
     private String title;
     private String writer;
     private String content;

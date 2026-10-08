@@ -25,7 +25,6 @@ public class BoardServiceImple implements BoardService{
         List<BoardListResponseDTO> contents = boardMapper.findBoardsAll(listDTO);
         int totalElements = boardMapper.countBoards(listDTO.getKeyword());
         return new PageImpl<>(contents, page, totalElements);
-
     }
 
     @Override
@@ -50,6 +49,6 @@ public class BoardServiceImple implements BoardService{
 
     @Override
     public boolean chkPw(Long id, String pw){
-        return (boardMapper.findBoardByIdForPw(id).equals(pw));
+        return (boardMapper.findBoardPw(id).equals(pw));
     }
 }

@@ -1,0 +1,32 @@
+/*우측 정렬 버튼 공통 css*/
+.a-btn {
+    background-color: white;
+    float: right;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 8px 17px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    text-decoration-line: none;
+    margin-right: 10%;
+}
+.a-btn-first {
+    background-color: white;
+    float: right;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 8px 17px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    text-decoration-line: none;
+    margin-right: 10px;
+}
+.a-btn:hover, .a-btn-first:hover {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

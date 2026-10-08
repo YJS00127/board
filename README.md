@@ -79,7 +79,7 @@ REST API (BoardAPIController)
 |       |   schema.sql
 |       |
 |       +---css
-|       |       board.css
+|       |       boardList.css
 |       |
 |       +---js
 |       |       detail.js

@@ -1,0 +1,34 @@
+/*title CSS*/
+.insert-title{
+    margin-left: 10%;
+}
+
+/*게시글 작성 칸 CSS*/
+.insert-content {
+    margin-left: 20%;
+}
+
+/*label 태그 공통 CSS*/
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/*input, textarea 태그 공통 CSS*/
+input, textarea {
+    border: 3px solid black;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.title {
+    width: 30%;
+}
+
+.content {
+    width: 70%;
+    height: 200px;
+    resize: none;
+}

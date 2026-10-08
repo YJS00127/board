@@ -14,16 +14,17 @@ async function loadData(){
     await fetch(`/api/board?keyword=${keyword}&page=${page}`)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             boardList = data.content;
             pageInfo = data;
+
+            // 10페이지씩 출력하기 위한 페이지 그룹 선언
             const pageGroup = Math.trunc(data.number/10)+1;
-            console.log(pageGroup)
+            // console.log(pageGroup)
             boardListOutPut(data.pageable.offset)
             pagination(pageGroup, data.number, keyword, data.totalPages)
         })
 }
-// 1~10 -> 1  / 11~20 -> 2
 
 // 게시글 검색
 function searchKeyword() {
@@ -54,7 +55,7 @@ function boardListOutPut(offset) {
             `<td class="boardWriter">${boardDetailData.writer}</td>` +
             `<td class="created-day">${boardDetailData.createdAt.slice(0,10)}</td>` +
             `<td class="created-time">${boardDetailData.createdAt.slice(11,16)}</td>`;
-        document.getElementById("boardListOutPut").append(tr);
+        document.querySelector("tbody").append(tr);
     })
 }
 
@@ -76,7 +77,7 @@ function pagination(pageGroup, page, keyword, totalPages) {
     }
 
     // 페이지 번호 클릭 이벤트
-    const pageButtonsEvent = (keyword) => {
+    const pageNumberClick = (keyword) => {
         pageNumberButtons = document.querySelectorAll('.number-button');
 
         pageNumberButtons.forEach((numberButton) => {
@@ -143,7 +144,7 @@ function pagination(pageGroup, page, keyword, totalPages) {
     }
 
     setPageButtons(pageGroup, totalPages);
-    pageButtonsEvent(keyword, page);
+    pageNumberClick(keyword, page);
     pageMoveButton(keyword, page);
     pageGroupMoveButton(keyword, pageGroup);
 

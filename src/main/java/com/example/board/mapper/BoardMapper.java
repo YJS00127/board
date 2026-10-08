@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface BoardMapper {
     List<BoardListResponseDTO> findBoardsAll(@Param("listDTO") BoardListRequestDTO listDTO);
-    String findBoardByIdForPw(@Param("id") Long id);
+    String findBoardPw(@Param("id") Long id);
     int countBoards(@Param("keyword") String keyword);
 
     BoardDetailResponseDTO findBoardById(@Param("id") Long id);
