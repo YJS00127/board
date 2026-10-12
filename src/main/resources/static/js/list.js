@@ -19,24 +19,32 @@ async function loadData(){
             pageInfo = data;
 
             // 10페이지씩 출력하기 위한 페이지 그룹 선언
-            const pageGroup = Math.trunc(data.number/10)+1;
+            const pageGroup = Math.trunc(pageInfo.number/10)+1;
             // console.log(pageGroup)
-            boardListOutPut(data.pageable.offset)
-            pagination(pageGroup, data.number, keyword, data.totalPages)
+            boardListOutPut(pageInfo.pageable.offset)
+            pagination(pageGroup, pageInfo.number, keyword, pageInfo.totalPages)
         })
 }
 
-// 게시글 검색
+// 게시글 검색 (엔터)
 function searchKeyword() {
     document.getElementById("search-input").addEventListener('keyup',
         function(e){
         if(e.key === 'Enter'){
             const keyword = document.getElementById("search-input").value;
-            if(keyword !== '' && keyword !== null) {
+            if(keyword !== '' || keyword !== null) {
                 location.href = `/board?keyword=${keyword}`;
             }
         }
     })
+}
+
+// 게시글 검색 (버튼)
+function searchBtnClick() {
+    const keyword = document.getElementById("search-btn").value;
+    if(keyword !== null || keyword !== '') {
+        location.href = `/board?keyword=${keyword}`;
+    }
 }
 
 // 게시글 출력
@@ -44,6 +52,10 @@ function boardListOutPut(offset) {
     const tbody = document.querySelector("tbody");
     let boardNumber = offset;
     tbody.innerHTML = ``;
+    if(boardList.length === 0){
+        document.querySelector("thead").innerHTML = ``;
+        return;
+    }
     boardList.forEach(boardDetailData => {
         const tr = document.createElement('tr');
         boardNumber += 1;
@@ -148,14 +160,14 @@ function pagination(pageGroup, page, keyword, totalPages) {
     pageMoveButton(keyword, page);
     pageGroupMoveButton(keyword, pageGroup);
 
-    pageNumberButtons.forEach((numberButton) => {
-        if (numberButton.classList.contains('selected')){
-            numberButton.classList.remove('selected');
-        }
-    })
-
-    pageNumberButtons[page%10].classList.add('selected');
-
+    if(!pageInfo.empty) {
+        pageNumberButtons.forEach((numberButton) => {
+            if (numberButton.classList.contains('selected')){
+                numberButton.classList.remove('selected');
+            }
+        })
+        pageNumberButtons[page % 10].classList.add('selected');
+    }
 
 }
 

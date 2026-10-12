@@ -16,7 +16,7 @@ public class BoardAPIController {
     private final BoardService boardService;
 
     @GetMapping
-    public ResponseEntity<Page<BoardListResponseDTO>> boardList(BoardListRequestDTO listDTO,
+    public ResponseEntity<Page<BoardListResponseDTO>> boardList(@ModelAttribute BoardListRequestDTO listDTO,
                                                           @PageableDefault(value=10) Pageable page){
         return ResponseEntity.ok(boardService.findBoardsAll(listDTO, page));
     }

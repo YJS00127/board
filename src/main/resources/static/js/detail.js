@@ -34,7 +34,6 @@ function pwChk(type){
         return;
     }
 
-
     if(type === 'delete'){
         fetch(`/api/board/`+id, {
             method: "DELETE",

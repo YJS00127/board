@@ -25,7 +25,22 @@
     text-decoration-line: none;
     margin-right: 10px;
 }
-.a-btn:hover, .a-btn-first:hover {
+
+/*검색 버튼 CSS*/
+.search-btn {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 8px 17px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+    text-decoration-line: none;
+}
+
+.a-btn:hover, .a-btn-first:hover, .search-btn:hover {
+    transition: background-color 0.2s ease;
     background-color: black;
     color: white;
     cursor: pointer;

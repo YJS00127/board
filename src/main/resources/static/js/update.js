@@ -17,7 +17,7 @@ function boardContentOutput(id) {
 }
 
 // 게시글 데이터 수정
-const updateContent = (id) => {
+const updateContent = () => {
     const title = document.getElementById("title").value
     const writer = document.getElementById('writer').value
     const content = document.getElementById('content').value
@@ -45,7 +45,7 @@ const updateContent = (id) => {
 }
 
 const updateCancel = (id) => {
-    location.href=`/board/detail/` + id
+    location.href=`/board/detail/`+id;
 }
 
 boardContentOutput(id)
