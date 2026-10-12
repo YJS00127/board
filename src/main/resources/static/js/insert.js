@@ -14,14 +14,44 @@ function insertContents(){
         }),
         headers: {'Content-Type': 'application/json'}
     })
-        .then(response => response.json())
+        .then(async response => {
+            const result = await response.json()
+            if(!response.ok){
+                showErrorMsg(result)
+                return
+            }
+            return result;
+        })
         .then(result => {
             console.log(result)
             if(result>0){
                 alert('게시물을 등록하였습니다.')
                 location.href='/board'
-            } else{
-                alert('게시물 등록에 실패하였습니다.')
             }
         })
+}
+
+function showErrorMsg(errorMsg){
+    const title = document.getElementById("error-title");
+    const writer = document.getElementById("error-writer");
+    const content = document.getElementById("error-content");
+    const pw = document.getElementById("error-pw");
+
+    title.innerHTML = ``;
+    writer.innerHTML = ``;
+    content.innerHTML = ``;
+    pw.innerHTML = ``;
+
+    if(errorMsg["title"]){
+        title.textContent = errorMsg["title"];
+    }
+    if(errorMsg["writer"]){
+        writer.textContent = errorMsg["writer"];
+    }
+    if(errorMsg["content"]){
+        content.textContent = errorMsg["content"];
+    }
+    if(errorMsg["pw"]){
+        pw.textContent = errorMsg["pw"];
+    }
 }

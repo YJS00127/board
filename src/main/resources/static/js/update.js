@@ -33,15 +33,40 @@ const updateContent = () => {
             'Content-Type' : 'application/json'
         }
     })
-        .then(response => response.json())
+        .then(async response => {
+            const result = await response.json();
+            if(!response.ok){
+                showErrorMsg(result)
+                return;
+            }
+            return result;
+        })
         .then(result => {
             if(result>0){
-                alert('게시글을 수정하였습니다.')
+                alert('게시글을 수정하였습니다.');
                 location.href=`/board/detail/`+id;
-            } else{
-                alert('게시글 수정에 실패하였습니다.')
             }
         })
+}
+
+function showErrorMsg(errorMessage){
+    const titleError = document.getElementById("error-msg-title")
+    const writerError = document.getElementById("error-msg-writer")
+    const contentError = document.getElementById("error-msg-content")
+
+    titleError.innerHTML = ``;
+    writerError.innerHTML = ``;
+    contentError.innerHTML = ``;
+
+        if(errorMessage["title"]){
+            titleError.textContent = errorMessage["title"];
+        }
+        if(errorMessage["writer"]){
+            writerError.textContent = errorMessage["writer"];
+        }
+        if(errorMessage["content"]) {
+            contentError.textContent = errorMessage["content"];
+        }
 }
 
 const updateCancel = (id) => {

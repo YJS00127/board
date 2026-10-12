@@ -4,27 +4,39 @@
     <meta charset="UTF-8">
     <title>게시글 작성</title>
     <link rel="Stylesheet" th:href="@{/css/button.css}">
-    <link rel="Stylesheet" th:href="@{/css/insert.css}">
+    <link rel="Stylesheet" th:href="@{/css/writeBoard.css}">
 </head>
 <body>
-<div class="insert-title">
+<div class="write-title">
     <h1>게시글 작성</h1><br>
 </div>
 <a class="a-btn" href="/board">목록</a>
 <form>
-    <div class="insert-content">
-    <label for="title">제목</label>
-    <input type="text" id='title' class="title"
-           placeholder="제목을 입력하세요" required>
-    <label for="writer">작성자</label>
-    <input type="text" id="writer" class="writer"
-           placeholder="작성자를 입력하세요" required>
-    <label for="content">내용</label>
-    <textarea id="content" class="content"
-           placeholder="내용을 입력하세요" required></textarea>
-    <label for="pw">비밀번호</label>
-    <input type="password" id="pw" class="pw"
-              placeholder="비밀번호를 입력하세요" required>
+    <div class="write-content">
+        <div>
+            <label for="title">제목</label>
+            <input type="text" id='title' class="title"
+                   placeholder="제목을 입력하세요">
+            <span id="error-title" class="error"></span>
+        </div>
+        <div>
+            <label for="writer">작성자</label>
+            <input type="text" id="writer" class="writer"
+                   placeholder="작성자를 입력하세요">
+            <span id="error-writer" class="error"></span>
+        </div>
+        <div>
+        <label for="content">내용</label>
+            <textarea id="content" class="content"
+                      placeholder="내용을 입력하세요"></textarea>
+            <span id="error-content" class="error"></span>
+        </div>
+        <div>
+            <label for="pw">비밀번호</label>
+            <input type="password" id="pw" class="pw"
+                   placeholder="비밀번호를 입력하세요">
+            <span id="error-pw" class="error"></span>
+        </div>
     </div>
         <button class ="a-btn" type="reset">초기화</button>
         <button class ="a-btn-first" type="button" onclick=insertContents()>등록</button>

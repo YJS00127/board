@@ -1,10 +1,5 @@
-/*title CSS*/
-.insert-title{
-    margin-left: 10%;
-}
-
-/*게시글 작성 칸 CSS*/
-.insert-content {
+/*게시글 작성 칸, write-title */
+.write-content, .write-title {
     margin-left: 20%;
 }
 
@@ -24,12 +19,22 @@ input, textarea {
     font-family: Arial, sans-serif;
 }
 
+/*title 좌우폭*/
 .title {
     width: 30%;
 }
 
+/*content 상하좌우 폭*/
 .content {
     width: 70%;
     height: 200px;
     resize: none;
+}
+
+/*error msg css*/
+.error {
+    color: red;
+    min-height: 20px;
+    font-size: 14px;
+    display: block;
 }

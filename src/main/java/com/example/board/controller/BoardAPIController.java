@@ -2,6 +2,7 @@ package com.example.board.controller;
 
 import com.example.board.dto.*;
 import com.example.board.service.BoardService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class BoardAPIController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> boardInsert(@RequestBody BoardCreateRequestDTO createBoardDTO){
+    public ResponseEntity<Integer> boardInsert(@Valid @RequestBody BoardCreateRequestDTO createBoardDTO){
         return ResponseEntity.ok(boardService.insertBoard(createBoardDTO));
     }
 
@@ -44,7 +45,8 @@ public class BoardAPIController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Integer> boardUpdate(@PathVariable Long id,
-                                               @RequestBody BoardUpdateRequestDTO updateBoardDTO){
+                                               @Valid @RequestBody BoardUpdateRequestDTO updateBoardDTO){
+
         return ResponseEntity.ok(boardService.updateBoard(id, updateBoardDTO));
     }
 

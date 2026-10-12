@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <title>게시글 수정</title>
     <link rel="Stylesheet" th:href="@{/css/button.css}">
+    <link rel="Stylesheet" th:href="@{/css/writeBoard.css}">
 </head>
 <body>
-<h1>게시글 수정</h1>
+<div  class="write-title">
+    <h1>게시글 수정</h1><br>
+</div>
 <a class="a-btn" href="/board">목록</a>
-<label for="title">제목</label>
-<input type="text" id="title"
-       value="title" placeholder="제목을 입력해주세요." required><br>
-<label for="writer">작성자</label>
-<input type="text" id="writer"
-       value="writer" placeholder="작성자를 입력해주세요." required><br>
-<label for="content">내용</label>
-<input type="text" id="content"
-       value="content" placeholder="내용을 입력해주세요." required><br>
+<div class="write-content">
+    <div>
+        <label for="title">제목</label>
+        <input type="text" id="title" class="title"
+               placeholder="제목을 입력해주세요.">
+        <span id="error-msg-title" class="error"></span>
+    </div>
+        <label for="writer">작성자</label>
+        <input type="text" id="writer" class="writer"
+               placeholder="작성자를 입력해주세요.">
+        <span id="error-msg-writer" class="error"></span>
+    <div>
+        <label for="content">내용</label>
+        <textarea id="content" class="content"
+                  placeholder="내용을 입력해주세요."></textarea>
+        <span id="error-msg-content" class="error"></span>
+    </div>
+</div>
 <div>
     <a class ="a-btn" onclick=updateCancel()>취소</a>
     <button class ="a-btn-first" onclick=updateContent()>수정</button>
