@@ -23,7 +23,6 @@ function insertContents(){
             return result;
         })
         .then(result => {
-            console.log(result)
             if(result>0){
                 alert('게시물을 등록하였습니다.')
                 location.href='/board'
@@ -36,11 +35,16 @@ function showErrorMsg(errorMsg){
     const writer = document.getElementById("error-writer");
     const content = document.getElementById("error-content");
     const pw = document.getElementById("error-pw");
+    const pwConfirm = document.getElementById("error-pwConfirm");
+
+    const pwValue = document.getElementById("pw").value;
+    const pwConfirmValue = document.getElementById("pwConfirm").value;
 
     title.innerHTML = ``;
     writer.innerHTML = ``;
     content.innerHTML = ``;
     pw.innerHTML = ``;
+    pwConfirm.innerHTML = ``;
 
     if(errorMsg["title"]){
         title.textContent = errorMsg["title"];
@@ -53,5 +57,8 @@ function showErrorMsg(errorMsg){
     }
     if(errorMsg["pw"]){
         pw.textContent = errorMsg["pw"];
+    }
+    if(pwValue !== '' && pwValue !== pwConfirmValue){
+        pwConfirm.textContent = '비밀번호를 다시 입력해주세요.';
     }
 }
