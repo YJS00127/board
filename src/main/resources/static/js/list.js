@@ -8,21 +8,18 @@ async function loadData(){
     const params = new URLSearchParams(location.search);
 
     const keyword = params.get('keyword') ?? '';
+    const category = params.get('category') ?? '';
     const page = params.get('page') ?? 0;
 
-
-    await fetch(`/api/board?keyword=${keyword}&page=${page}`)
+    await fetch(`/api/board?keyword=${keyword}&category=${category}&page=${page}`)
         .then(response => response.json())
         .then(data => {
-            // console.log(data)
             boardList = data.content;
             pageInfo = data;
-
-            // 10페이지씩 출력하기 위한 페이지 그룹 선언
+            // 10페이지씩 출력하기 위한 페이지 그룹
             const pageGroup = Math.trunc(pageInfo.number/10)+1;
-            // console.log(pageGroup)
             boardListOutPut(pageInfo.pageable.offset)
-            pagination(pageGroup, pageInfo.number, keyword, pageInfo.totalPages)
+            pagination(pageGroup, keyword, category, pageInfo.number, pageInfo.totalPages)
         })
 }
 
@@ -32,8 +29,9 @@ function searchKeyword() {
         function(e){
         if(e.key === 'Enter'){
             const keyword = document.getElementById("search-input").value;
-            if(keyword !== '' || keyword !== null) {
-                location.href = `/board?keyword=${keyword}`;
+            const category = document.getElementById("category").value;
+            if(keyword !== '' && keyword !== null) {
+                location.href = `/board?keyword=${keyword}&category=${category}`;
             }
         }
     })
@@ -41,9 +39,10 @@ function searchKeyword() {
 
 // 게시글 검색 (버튼)
 function searchBtnClick() {
-    const keyword = document.getElementById("search-btn").value;
-    if(keyword !== null || keyword !== '') {
-        location.href = `/board?keyword=${keyword}`;
+    const keyword = document.getElementById("search-input").value;
+    const category = document.getElementById("category").value;
+    if(keyword !== null && keyword !== '') {
+        location.href = `/board?keyword=${keyword}&category=${category}`;
     }
 }
 
@@ -65,6 +64,7 @@ function boardListOutPut(offset) {
                 <a href="/board/detail/${boardDetailData.id}">${boardDetailData.title}</a>
             </td>` +
             `<td class="boardWriter">${boardDetailData.writer}</td>` +
+            `<td class="view-count">${boardDetailData.viewCount}</td>` +
             `<td class="created-day">${boardDetailData.createdAt.slice(0,10)}</td>` +
             `<td class="created-time">${boardDetailData.createdAt.slice(11,16)}</td>`;
         document.querySelector("tbody").append(tr);
@@ -72,8 +72,7 @@ function boardListOutPut(offset) {
 }
 
 // 페이지네이션 (페이지 생성, 클릭 시 이동 이벤트)
-function pagination(pageGroup, page, keyword, totalPages) {
-
+function pagination(pageGroup, keyword, category, page, totalPages) {
     // 페이지 생성
     const setPageButtons = (pageGroup, totalPages) => {
         const numberButtonWrapper = document.querySelector('.number-button-wrapper');
@@ -89,13 +88,13 @@ function pagination(pageGroup, page, keyword, totalPages) {
     }
 
     // 페이지 번호 클릭 이벤트
-    const pageNumberClick = (keyword) => {
+    const pageNumberClick = (keyword, category) => {
         pageNumberButtons = document.querySelectorAll('.number-button');
 
         pageNumberButtons.forEach((numberButton) => {
             numberButton.addEventListener('click', (e) => {
                 if(keyword !== '' && keyword !== null) {
-                    location.href = `/board?keyword=${keyword}&page=${numberButton.textContent - 1}`;
+                    location.href = `/board?keyword=${keyword}&category=${category}&page=${numberButton.textContent - 1}`;
                 } else{
                     location.href = `/board?page=${numberButton.textContent - 1}`;
                 }
@@ -104,14 +103,14 @@ function pagination(pageGroup, page, keyword, totalPages) {
     }
 
     // 이전, 다음 페이지 이동
-    const pageMoveButton = (keyword, page) => {
+    const pageMoveButton = (keyword, category, page) => {
         const prev = document.querySelector('.prev-page-button');
         const next = document.querySelector('.next-page-button');
 
         prev.addEventListener('click', (e) => {
             if(!pageInfo.first){
                 if(keyword !== '' && keyword !== null){
-                    location.href = `/board?keyword=${keyword}&page=${page - 1}`;
+                    location.href = `/board?keyword=${keyword}&category=${category}&page=${page - 1}`;
                 } else{
                     location.href = `/board?page=${page - 1}`;
                 }
@@ -121,7 +120,7 @@ function pagination(pageGroup, page, keyword, totalPages) {
         next.addEventListener('click', (e) => {
             if(!pageInfo.last){
                 if(keyword !== '' && keyword !== null) {
-                    location.href = `/board?keyword=${keyword}&page=${page + 1}`;
+                    location.href = `/board?keyword=${keyword}&category=${category}&page=${page + 1}`;
                 } else{
                     location.href = `/board?page=${page + 1}`;
                 }
@@ -130,14 +129,14 @@ function pagination(pageGroup, page, keyword, totalPages) {
     }
 
     // 이전 페이지 그룹 (<) , 다음 페이지 그룹 (>) 이동
-    const pageGroupMoveButton = (keyword, pageGroup) => {
+    const pageGroupMoveButton = (keyword, category, pageGroup) => {
         const prevGroup= document.querySelector('.prev-pageGroup-button');
         const nextGroup = document.querySelector('.next-pageGroup-button');
 
         prevGroup.addEventListener('click', (e) => {
             if(pageGroup !== 1){
                 if(keyword !== '' && keyword !== null){
-                    location.href = `/board?keyword=${keyword}&page=${(pageGroup-2)*10}`;
+                    location.href = `/board?keyword=${keyword}&category=${category}&page=${(pageGroup-2)*10}`;
                 } else{
                     location.href = `/board?page=${(pageGroup-2)*10}`;
                 }
@@ -147,7 +146,7 @@ function pagination(pageGroup, page, keyword, totalPages) {
         nextGroup.addEventListener('click', (e) => {
             if(pageGroup !== Math.trunc(totalPages/10)+1){
                 if(keyword !== '' && keyword !== null) {
-                    location.href = `/board?keyword=${keyword}&page=${(pageGroup)*10}`;
+                    location.href = `/board?keyword=${keyword}&category=${category}&page=${(pageGroup)*10}`;
                 } else{
                     location.href = `/board?page=${(pageGroup)*10}`;
                 }
@@ -156,9 +155,9 @@ function pagination(pageGroup, page, keyword, totalPages) {
     }
 
     setPageButtons(pageGroup, totalPages);
-    pageNumberClick(keyword, page);
-    pageMoveButton(keyword, page);
-    pageGroupMoveButton(keyword, pageGroup);
+    pageNumberClick(keyword, category, page);
+    pageMoveButton(keyword, category, page);
+    pageGroupMoveButton(keyword, category, pageGroup);
 
     if(!pageInfo.empty) {
         pageNumberButtons.forEach((numberButton) => {

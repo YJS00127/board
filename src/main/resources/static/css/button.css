@@ -37,6 +37,7 @@
     font-weight: 600;
     transition: background-color 0.2s ease;
     text-decoration-line: none;
+    margin-left: 5px;
 }
 
 .a-btn:hover, .a-btn-first:hover, .search-btn:hover {

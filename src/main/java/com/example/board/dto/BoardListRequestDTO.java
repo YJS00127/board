@@ -9,6 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class BoardListRequestDTO {
     private String keyword;
+    private String category;
     private Long offset;
     private int pageSize;
 }
