@@ -3,6 +3,11 @@ function insertContents(){
     const writer = document.getElementById('writer').value
     const content = document.getElementById('content').value
     const pw = document.getElementById('pw').value
+    const pwConfirm = document.getElementById('pwConfirm').value
+
+    console.log(pw)
+    console.log(pwConfirm)
+
 
     fetch(`/api/board`, {
         method: "POST",
@@ -10,12 +15,14 @@ function insertContents(){
             title,
             writer,
             content,
-            pw
+            pw,
+            pwConfirm
         }),
         headers: {'Content-Type': 'application/json'}
     })
         .then(async response => {
             const result = await response.json()
+            console.log(result)
             if(!response.ok){
                 showErrorMsg(result)
                 return
@@ -23,7 +30,7 @@ function insertContents(){
             return result;
         })
         .then(result => {
-            if(result>0){
+            if(result>0) {
                 alert('게시물을 등록하였습니다.')
                 location.href='/board'
             }
@@ -36,9 +43,6 @@ function showErrorMsg(errorMsg){
     const content = document.getElementById("error-content");
     const pw = document.getElementById("error-pw");
     const pwConfirm = document.getElementById("error-pwConfirm");
-
-    const pwValue = document.getElementById("pw").value;
-    const pwConfirmValue = document.getElementById("pwConfirm").value;
 
     title.innerHTML = ``;
     writer.innerHTML = ``;
@@ -58,7 +62,7 @@ function showErrorMsg(errorMsg){
     if(errorMsg["pw"]){
         pw.textContent = errorMsg["pw"];
     }
-    if(pwValue !== '' && pwValue !== pwConfirmValue){
-        pwConfirm.textContent = '비밀번호를 다시 입력해주세요.';
+    if(errorMsg["pwEquals"]){
+        pwConfirm.textContent = errorMsg["pwEquals"];
     }
 }

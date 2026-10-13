@@ -2,10 +2,11 @@ const id = location.pathname.split("/").pop()
 
 // 상세 게시글 출력
 function boardDetailOutput() {
-    const title = document.querySelector(".title")
-    const writer = document.querySelector(".writer")
-    const content = document.querySelector(".content")
-    const createdAt = document.querySelector(".createdAt")
+    const title = document.querySelector(".detail-title")
+    const writer = document.querySelector(".detail-writer")
+    const content = document.querySelector(".detail-content")
+    const createdAt = document.querySelector(".detail-created-at")
+    const viewCount = document.querySelector(".detail-view-count")
 
     fetch(`/api/board/detail/${id}`)
         .then(response => {
@@ -20,6 +21,7 @@ function boardDetailOutput() {
             title.textContent = data.title;
             writer.textContent = data.writer;
             content.textContent = data.content;
+            viewCount.textContent = data.viewCount;
             createdAt.textContent = data.createdAt.slice(0,16);
         })
 }

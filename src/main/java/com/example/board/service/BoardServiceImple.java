@@ -2,6 +2,9 @@ package com.example.board.service;
 
 import com.example.board.dto.*;
 import com.example.board.mapper.BoardMapper;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
@@ -12,7 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BoardServiceImple implements BoardService{
+public class BoardServiceImple implements BoardService {
 
     private final BoardMapper boardMapper;
 
@@ -22,17 +25,18 @@ public class BoardServiceImple implements BoardService{
         listDTO.setPageSize(page.getPageSize());
 
         List<BoardListResponseDTO> contents = boardMapper.findBoardsAll(listDTO);
-        int totalElements = boardMapper.countBoards(listDTO.getKeyword());
+        int totalElements = boardMapper.countBoards(listDTO.getKeyword(), listDTO.getCategory());
         return new PageImpl<>(contents, page, totalElements);
     }
 
     @Override
-    public BoardDetailResponseDTO findBoardById(Long id){
+    public BoardDetailResponseDTO findBoardById(Long id) {
+        boardMapper.viewCountPlus(id);
         return boardMapper.findBoardById(id);
     }
 
     @Override
-    public int insertBoard(BoardCreateRequestDTO createBoard){
+    public int insertBoard(BoardCreateRequestDTO createBoard) {
         return boardMapper.insertBoard(createBoard);
     }
 
@@ -42,12 +46,12 @@ public class BoardServiceImple implements BoardService{
     }
 
     @Override
-    public int deleteBoard(Long id, String pw){
+    public int deleteBoard(Long id, String pw) {
         return boardMapper.deleteBoard(id, pw);
     }
 
     @Override
-    public boolean chkPw(Long id, String pw){
+    public boolean chkPw(Long id, String pw) {
         return (boardMapper.findBoardPw(id).equals(pw));
     }
 }

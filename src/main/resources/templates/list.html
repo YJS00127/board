@@ -12,6 +12,10 @@
 </a>
 <div>
     <a class="a-btn" href="/board/insert">등록</a>
+    <select id="category" class="category">
+        <option value="title">제목</option>
+        <option value="writer">작성자</option>
+    </select>
     <input class="search" id="search-input" type="text" name="keyword" placeholder="검색어를 입력하세요"/>
     <button class="search-btn" id="search-btn" onclick=searchBtnClick()>검색</button>
 </div>
@@ -22,6 +26,7 @@
         <th>번호</th>
         <th>제목</th>
         <th>작성자</th>
+        <th>조회수</th>
         <th>작성일</th>
         <th>작성시간</th>
     </tr>

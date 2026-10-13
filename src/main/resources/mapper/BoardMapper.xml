@@ -4,29 +4,40 @@
 <mapper namespace="com.example.board.mapper.BoardMapper">
 
     <select id="findBoardsAll">
-        SELECT id, title, writer, created_at
+        SELECT id, title, writer, view_count, created_at
         FROM board
             <where>
                 <if test = "listDTO.keyword != null and listDTO.keyword != ''">
-                title LIKE CONCAT('%', #{listDTO.keyword}, '%')
+                    <if test = "listDTO.category == 'title'">
+                        title LIKE CONCAT('%', #{listDTO.keyword}, '%')
+                    </if>
+                    <if test = "listDTO.category == 'writer'">
+                        writer LIKE CONCAT('%', #{listDTO.keyword}, '%')
+                    </if>
                 </if>
             </where>
         ORDER BY id DESC
         LIMIT #{listDTO.pageSize}
         OFFSET #{listDTO.offset}
     </select>
+
     <select id="countBoards" resultType="int">
         SELECT COUNT(*)
         FROM board
         <where>
             <if test="keyword != null and keyword != ''">
-                title LIKE CONCAT('%', #{keyword}, '%')
+                <if test="category == 'title'">
+                    title LIKE CONCAT('%', #{keyword}, '%')
+                </if>
+                <if test="category == 'writer'">
+                    writer LIKE CONCAT('%', #{keyword}, '%')
+                </if>
             </if>
         </where>
     </select>
 
     <select id="findBoardById">
-        SELECT title, writer, content, created_at
+        SELECT title, writer, content, view_count, created_at
         FROM board
         WHERE id = #{id}
     </select>
@@ -54,4 +65,10 @@
         DELETE FROM board
         WHERE id= #{id} AND pw= #{pw}
     </delete>
+
+    <update id="viewCountPlus">
+        UPDATE board
+        SET view_count = view_count + 1
+        WHERE id = #{id}
+    </update>
 </mapper>

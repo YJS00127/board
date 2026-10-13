@@ -1,3 +1,7 @@
+/***************/
+/*게시판 등록 css*/
+/***************/
+
 /*게시글 작성 칸, write-title */
 .write-content, .write-title {
     margin-left: 20%;
@@ -20,16 +24,42 @@ input, textarea {
 }
 
 /*title 좌우폭*/
-.title {
+.insert-title {
     width: 30%;
 }
 
 /*content 상하좌우 폭*/
-.content {
-    width: 70%;
-    height: 200px;
+.insert-content {
+    width: 60%;
+    height: 100px;
     resize: none;
 }
+
+/***************/
+/*상세 게시글 css*/
+/***************/
+
+.boardDetail-title, .boardDetailBody {
+    margin-left: 25%;
+}
+
+.title-writer {
+    display: inline-block;
+}
+
+.detail-content {
+    border: 3px solid darkgray;
+    border-radius: 3px;
+    padding: 10px 12px;
+    font-size: 14px;
+    margin-bottom: 5px;
+    width: 60%;
+    height: 150px;
+}
+
+/***************/
+/*게시글 수정 css*/
+/***************/
 
 /*error msg css*/
 .error {
@@ -37,4 +67,16 @@ input, textarea {
     min-height: 20px;
     font-size: 14px;
     display: block;
+}
+
+/*title 좌우폭*/
+.update-title {
+    width: 30%;
+}
+
+/*content 상하좌우 폭*/
+.update-content {
+    width: 60%;
+    height: 200px;
+    resize: none;
 }
