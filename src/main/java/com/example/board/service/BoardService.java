@@ -27,4 +27,6 @@ public interface BoardService {
 
     // 게시글 수정, 삭제를 위한 비밀번호 확인
     boolean chkPw(Long id, String pw);
+
+    void addViewCount(HttpServletRequest request, HttpServletResponse response, Long id);
 }

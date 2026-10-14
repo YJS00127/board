@@ -2,6 +2,9 @@ package com.example.board.controller;
 
 import com.example.board.dto.*;
 import com.example.board.service.BoardService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,11 +26,22 @@ public class BoardAPIController {
     }
 
     @GetMapping("/detail/{id}")
-    public ResponseEntity<BoardDetailResponseDTO> boardDetail(@PathVariable Long id){
+    public ResponseEntity<BoardDetailResponseDTO> boardDetail(@PathVariable Long id,
+                                                              HttpServletRequest request,
+                                                              HttpServletResponse response){
+        // 게시글 존재여부 확인
         BoardDetailResponseDTO boardDetailResponse = boardService.findBoardById(id);
+
         if(boardDetailResponse == null){
             return ResponseEntity.notFound().build();
         }
+
+        // 조회수 및 쿠키 처리
+        boardService.addViewCount(request, response, id);
+
+        // 조회수 증가한 response
+        boardDetailResponse = boardService.findBoardById(id);
+
         return ResponseEntity.ok(boardDetailResponse);
     }
 

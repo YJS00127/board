@@ -40,6 +40,10 @@ th, td {
     padding: 5px 10px;
 }
 
+th {
+    background-color: lightgray;
+}
+
 .boardNum {
     text-align: center;
     width: 5%;
