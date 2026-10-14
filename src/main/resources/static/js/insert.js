@@ -7,8 +7,7 @@ function insertContents(){
 
     console.log(pw)
     console.log(pwConfirm)
-
-
+    
     fetch(`/api/board`, {
         method: "POST",
         body: JSON.stringify({

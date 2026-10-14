@@ -39,39 +39,61 @@ input, textarea {
 /*상세 게시글 css*/
 /***************/
 
-.boardDetail-title, .boardDetailBody {
-    margin-left: 25%;
+.boardDetail-title {
+    margin-left: 20%;
+    margin-bottom: 3%;
 }
 
-.detail-writer {
-    margin-top: 3%;
+table {
+    width: 60%;
+    margin-left: 20%;
+    border-collapse: collapse;
 }
+
+th, td {
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+td.detail-writer {
+    width: 50%
+}
+
+th {
+    background-color: lightgray;
+    width: 10%;
+    text-align: left;
+}
+
+/*.detail-writer {*/
+/*    margin-top: 3%;*/
+/*}*/
 
 .detail-content {
     font-size: 16px;
     margin-bottom: 5px;
     width: 60%;
-    height: 350px;
+    height: 200px;
 }
 
-.viewCount-createdAt {
-    display: flex;
-}
+/*.viewCount-createdAt {*/
+/*    display: flex;*/
+/*}*/
 
-.detail-viewCount {
-    display: flex;
-}
+/*.detail-viewCount {*/
+/*    display: flex;*/
+/*}*/
 
-.detail-view-count {
-    margin-left: 3px;
-}
-.detail-createdAt {
-    display: flex;
-    margin-left: 30%;
-}
-.detail-created-at {
-    margin-left: 3px;
-}
+/*.detail-view-count {*/
+/*    margin-left: 3px;*/
+/*}*/
+/*.detail-createdAt {*/
+/*    display: flex;*/
+/*    margin-left: 30%;*/
+/*}*/
+/*.detail-created-at {*/
+/*    margin-left: 3px;*/
+/*}*/
 
 /***************/
 /*게시글 수정 css*/
