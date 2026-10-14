@@ -66,3 +66,12 @@ function showErrorMsg(errorMsg){
         pwConfirm.textContent = errorMsg["pwEquals"];
     }
 }
+
+function resetValue() {
+    document.querySelector(".write-content").reset();
+
+    document.querySelectorAll(".write-content .error").forEach(span => {
+        span.innerHTML = '';
+    })
+
+}
