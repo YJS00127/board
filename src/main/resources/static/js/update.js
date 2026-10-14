@@ -69,7 +69,7 @@ function showErrorMsg(errorMessage){
         }
 }
 
-const updateCancel = (id) => {
+const updateCancel = () => {
     location.href=`/board/detail/`+id;
 }
 

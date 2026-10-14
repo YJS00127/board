@@ -43,18 +43,34 @@ input, textarea {
     margin-left: 25%;
 }
 
-.title-writer {
-    display: inline-block;
+.detail-writer {
+    margin-top: 3%;
 }
 
 .detail-content {
-    border: 3px solid darkgray;
-    border-radius: 3px;
-    padding: 10px 12px;
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 5px;
     width: 60%;
-    height: 150px;
+    height: 350px;
+}
+
+.viewCount-createdAt {
+    display: flex;
+}
+
+.detail-viewCount {
+    display: flex;
+}
+
+.detail-view-count {
+    margin-left: 3px;
+}
+.detail-createdAt {
+    display: flex;
+    margin-left: 30%;
+}
+.detail-created-at {
+    margin-left: 3px;
 }
 
 /***************/

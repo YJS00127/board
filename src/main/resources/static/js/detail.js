@@ -19,7 +19,7 @@ function boardDetailOutput() {
         })
         .then(data => {
             title.textContent = data.title;
-            writer.textContent = data.writer;
+            writer.textContent = '[' + data.writer + ']';
             content.textContent = data.content;
             viewCount.textContent = data.viewCount;
             createdAt.textContent = data.createdAt.slice(0,16);

@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <title>상세 게시글</title>
     <link rel="Stylesheet" th:href="@{/css/button.css}">
-    <link rel="Stylesheet" th:href="@{/css/writeBoard.css}">
+    <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
     <h1 class="boardDetail-title">상세 게시글</h1>
     <a class="a-btn" href="/board">목록</a>
     <div class="boardDetailBody">
-        <div class="title-writer">
-            <h2 class="detail-title"></h2>
-            <p class="detail-writer"></p>
-        </div>
+        <p class="detail-writer"></p>
+        <h3 class="detail-title"></h3>
         <div>
-            <h3>내용</h3>
             <p class="detail-content"></p>
         </div>
-        <div>
-            <h5>조회수</h5>
-            <p class="detail-view-count"></p>
-        </div>
-        <div>
-            <h3>작성일자</h3><p class="detail-created-at"></p>
+        <div class = "viewCount-createdAt">
+            <div class="detail-viewCount">
+                <p>조회수  : </p>
+                <p class="detail-view-count"></p>
+            </div>
+            <div class="detail-createdAt">
+                <p>작성일  :  </p>
+                <p class="detail-created-at"></p>
+            </div>
         </div>
     </div>
     <div class="pwChk">
