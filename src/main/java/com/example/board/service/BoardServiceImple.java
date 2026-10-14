@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
@@ -31,8 +32,42 @@ public class BoardServiceImple implements BoardService {
 
     @Override
     public BoardDetailResponseDTO findBoardById(Long id) {
-        boardMapper.viewCountPlus(id);
         return boardMapper.findBoardById(id);
+    }
+
+    // 조회수 증가 및 쿠키 처리
+    @Override
+    public void addViewCount(HttpServletRequest request, HttpServletResponse response, Long id) {
+        // 기존에 생성된 쿠키를 저장할 객체
+        Cookie oldCookie = null;
+
+        // 요청에서 온 쿠키들을 쿠키 객체 리스트에 저장
+        Cookie[] cookies = request.getCookies();
+
+        if(cookies != null){
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("LookedUpBoard")) {
+                    oldCookie = cookie;
+                    break;
+                }
+            }
+        }
+        if(oldCookie != null){
+            if(!oldCookie.getValue().contains("[" + id.toString() + "]")){
+                boardMapper.viewCountPlus(id);
+                oldCookie.setValue(oldCookie.getValue() + "_[" + id + "]");
+                oldCookie.setPath("/");
+                oldCookie.setMaxAge(60 * 5);
+                response.addCookie(oldCookie);
+            }
+        } else{
+            boardMapper.viewCountPlus(id);
+
+            Cookie newCookie = new Cookie("LookedUpBoard", "[" + id + "]");
+            newCookie.setPath("/");
+            newCookie.setMaxAge(60 * 5);
+            response.addCookie(newCookie);
+        }
     }
 
     @Override
