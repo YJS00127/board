@@ -1,14 +1,13 @@
-package com.example.board.service;
+package boardsv.board.service;
 
-import com.example.board.dto.*;
-import com.example.board.mapper.BoardMapper;
+import boardsv.board.dto.*;
+import boardsv.board.mapper.BoardMapper;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 

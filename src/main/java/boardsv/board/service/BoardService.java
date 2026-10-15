@@ -1,9 +1,6 @@
-package com.example.board.service;
-import com.example.board.dto.*;
+package boardsv.board.service;
+import boardsv.board.dto.*;
 
-import java.util.Map;
-
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.data.domain.Page;

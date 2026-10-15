@@ -1,6 +1,6 @@
-package com.example.board.mapper;
+package boardsv.board.mapper;
 
-import com.example.board.dto.*;
+import boardsv.board.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

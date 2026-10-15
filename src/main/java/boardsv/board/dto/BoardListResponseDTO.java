@@ -1,4 +1,4 @@
-package com.example.board.dto;
+package boardsv.board.dto;
 
 import lombok.Getter;
 

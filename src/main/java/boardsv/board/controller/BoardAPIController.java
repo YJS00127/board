@@ -1,8 +1,7 @@
-package com.example.board.controller;
+package boardsv.board.controller;
 
-import com.example.board.dto.*;
-import com.example.board.service.BoardService;
-import jakarta.servlet.http.Cookie;
+import boardsv.board.dto.*;
+import boardsv.board.service.BoardService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -21,7 +20,7 @@ public class BoardAPIController {
 
     @GetMapping
     public ResponseEntity<Page<BoardListResponseDTO>> boardList(@ModelAttribute BoardListRequestDTO listDTO,
-                                                          @PageableDefault(value=10) Pageable page){
+                                                                @PageableDefault(value=10) Pageable page){
         return ResponseEntity.ok(boardService.findBoardsAll(listDTO, page));
     }
 
