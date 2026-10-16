@@ -24,14 +24,14 @@ const updateContent = () => {
 
     fetch(`/api/board/`+id, {
         method: "PUT",
+        headers: {
+            'Content-Type' : 'application/json'
+        },
         body: JSON.stringify({
             title,
             writer,
             content
-        }),
-        headers: {
-            'Content-Type' : 'application/json'
-        }
+        })
     })
         .then(async response => {
             const result = await response.json();

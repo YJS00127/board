@@ -48,7 +48,8 @@
         WHERE id= #{id}
     </select>
 
-    <insert id="insertBoard">
+    <insert id="insertBoard"
+            useGeneratedKeys="true" keyProperty="id">
         INSERT INTO board(title, content, writer, pw)
         VALUES (#{createBoard.title}, #{createBoard.content}, #{createBoard.writer}, #{createBoard.pw})
     </insert>

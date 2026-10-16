@@ -1,120 +1,287 @@
-/***************/
-/*게시판 등록 css*/
-/***************/
 
-/*게시글 작성 칸, write-title */
-.write-content, .write-title {
-    margin-left: 20%;
+/************************/
+/* 게시글 등록 CSS */
+/************************/
+
+/* 등록 폼 전체 */
+.form-data {
+    width: 70%;
+    margin: 5% 0 20px 15%;
+    border-top: 2px solid #71869a;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
-/*label 태그 공통 CSS*/
-label {
-    display: block;
-    margin-bottom: 5px;
+/* 각 행 */
+.form-data > div {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 50px;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
 }
 
-/*input, textarea 태그 공통 CSS*/
-input, textarea {
-    border: 2px solid darkgray;
-    border-radius: 6px;
-    padding: 10px 12px;
-    font-size: 14px;
-    margin-bottom: 5px;
-    font-family: Arial, sans-serif;
+/* 라벨 */
+.form-data label {
+    display: flex;
+    align-items: center;
+    flex: 0 0 15%;
+    margin: 0;
+    padding: 12px;
+    background-color: #f4f5f6;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
 }
 
-/*title 좌우폭*/
-.insert-title {
-    width: 30%;
+/* 입력창 */
+.form-data input,
+.form-data textarea {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    margin: 8px 10px;
+    padding: 9px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: inherit;
+    background-color: #fff;
 }
 
-/*content 상하좌우 폭*/
-.insert-content {
-    width: 60%;
-    height: 100px;
+/* 작성자 / 등록일 */
+.form-data > div:first-child {
+    display: grid;
+    grid-template-columns: 15% 35% 15% 35%;
+}
+
+.form-data > div:first-child label {
+    width: 100%;
+    min-width: 0;
+}
+
+/* 등록일 */
+.form-data .insert-created-at {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    margin: 8px 10px;
+    padding: 9px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
+/* 비밀번호 / 비밀번호 확인 */
+.form-data > div:nth-child(4) {
+    display: grid;
+    grid-template-columns: 15% 35% 15% 35%;
+}
+
+.form-data > div:nth-child(4) label {
+    width: 100%;
+    min-width: 0;
+}
+
+/* 내용 */
+.form-data .insert-content {
+    height: 180px;
     resize: none;
 }
 
-/***************/
-/*상세 게시글 css*/
-/***************/
+/* 첨부파일 */
+.form-data .insert-file {
+    border: none;
+    padding: 6px 0;
+}
+
+/* placeholder */
+.form-data input::placeholder,
+.form-data textarea::placeholder {
+    color: #999;
+}
+
+/* 필수 표시 */
+.form-data label[for="title"]::after,
+.form-data label[for="writer"]::after,
+.form-data label[for="content"]::after,
+.form-data label[for="pw"]::after,
+.form-data label[for="pwConfirm"]::after {
+    content: " *";
+    color: red;
+    margin-left: 3px;
+}
+
+/* 포커스 */
+.form-data input:focus,
+.form-data textarea:focus {
+    outline: none;
+    border-color: #71869a;
+}
+
+
+/************************/
+/* 상세 게시글 CSS */
+/************************/
 
 .boardDetail-title {
-    margin-left: 20%;
-    margin-bottom: 3%;
+    margin-left: 15%;
 }
 
-table {
-    width: 60%;
-    margin-left: 20%;
+/* 상세 테이블 */
+.boardDetail-title ~ div table {
+    width: 70%;
+    margin: 5% 0 20px 15%;
     border-collapse: collapse;
+    border-top: 2px solid #71869a;
+    table-layout: fixed;
+    font-size: 13px;
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 5px 10px;
+/* 셀 공통 */
+.boardDetail-title ~ div th,
+.boardDetail-title ~ div td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    height: 50px;
+    box-sizing: border-box;
 }
 
-td.detail-writer {
-    width: 55%
-}
-
-th {
-    background-color: lightgray;
-    width: 10%;
+/* 라벨 */
+.boardDetail-title ~ div th {
+    width: 15%;
+    background-color: #f4f5f6;
     text-align: left;
+    font-weight: bold;
+    color: #555;
 }
 
-/*.detail-writer {*/
-/*    margin-top: 3%;*/
-/*}*/
+/* 데이터 */
+.boardDetail-title ~ div td {
+    width: 35%;
+    background-color: #fff;
+    color: #333;
+    overflow-wrap: anywhere;
+}
 
-.detail-content {
-    font-size: 16px;
-    margin-bottom: 5px;
-    width: 60%;
+/* 내용 */
+.boardDetail-title ~ div .detail-content {
     height: 200px;
+    vertical-align: top;
+    white-space: pre-wrap;
+    line-height: 1.6;
 }
 
-/*.viewCount-createdAt {*/
-/*    display: flex;*/
-/*}*/
+/* 첨부파일 */
+.boardDetail-title ~ div .detail-files {
+    vertical-align: middle;
+}
 
-/*.detail-viewCount {*/
-/*    display: flex;*/
-/*}*/
 
-/*.detail-view-count {*/
-/*    margin-left: 3px;*/
-/*}*/
-/*.detail-createdAt {*/
-/*    display: flex;*/
-/*    margin-left: 30%;*/
-/*}*/
-/*.detail-created-at {*/
-/*    margin-left: 3px;*/
-/*}*/
+/************************/
+/* 게시글 수정 CSS */
+/************************/
 
-/***************/
-/*게시글 수정 css*/
-/***************/
+/* 수정 폼 전체 */
+.write-content {
+    width: 70%;
+    margin: 5% 0 20px 15%;
+    border-top: 2px solid #71869a;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+}
 
-/*error 메세지 css*/
+/* 각 행 */
+.write-content > div {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 50px;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+/* 라벨 */
+.write-content label {
+    display: flex;
+    align-items: center;
+    flex: 0 0 15%;
+    margin: 0;
+    padding: 12px;
+    box-sizing: border-box;
+    background-color: #f4f5f6;
+    border-right: 1px solid #ddd;
+    font-size: 13px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* 입력창 */
+.write-content input,
+.write-content textarea {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    margin: 8px 10px;
+    padding: 9px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 13px;
+    font-family: inherit;
+}
+
+/* 내용 */
+.write-content .update-content {
+    height: 180px;
+    resize: none;
+}
+
+/* 첨부파일 */
+.write-content input[type="file"] {
+    border: none;
+    padding: 6px 0;
+}
+
+/* 필수 표시 */
+.write-content label[for="title"]::after,
+.write-content label[for="writer"]::after,
+.write-content label[for="content"]::after {
+    content: " *";
+    color: red;
+    margin-left: 3px;
+}
+
+/* 포커스 */
+.write-content input:focus,
+.write-content textarea:focus {
+    outline: none;
+    border-color: #71869a;
+}
+
+/* placeholder */
+.write-content input::placeholder,
+.write-content textarea::placeholder {
+    color: #999;
+}
+
+/* 오류 메시지 */
+.write-content .error {
+    color: red;
+    font-size: 12px;
+    align-self: center;
+}
+
+/************************/
+/* 공통 오류 메시지 */
+/************************/
+
 .error {
     color: red;
-    min-height: 20px;
-    font-size: 14px;
-    display: block;
-}
-
-/*title 좌우폭*/
-.update-title {
-    width: 30%;
-}
-
-/*content 상하좌우 폭*/
-.update-content {
-    width: 60%;
-    height: 200px;
-    resize: none;
+    font-size: 12px;
 }

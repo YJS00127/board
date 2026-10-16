@@ -11,6 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -45,8 +48,9 @@ public class BoardAPIController {
     }
 
     @PostMapping
-    public ResponseEntity<Integer> boardInsert(@Valid @RequestBody BoardCreateRequestDTO createBoardDTO){
-        return ResponseEntity.ok(boardService.insertBoard(createBoardDTO));
+    public ResponseEntity<Integer> boardInsert(BoardCreateRequestDTO createBoardDTO,
+                                               @RequestPart("files") List<MultipartFile> files){
+        return ResponseEntity.ok(boardService.insertBoard(createBoardDTO, files));
     }
 
     // 비밀번호 확인
@@ -59,7 +63,6 @@ public class BoardAPIController {
     @PutMapping("/{id}")
     public ResponseEntity<Integer> boardUpdate(@PathVariable Long id,
                                                @Valid @RequestBody BoardUpdateRequestDTO updateBoardDTO){
-
         return ResponseEntity.ok(boardService.updateBoard(id, updateBoardDTO));
     }
 

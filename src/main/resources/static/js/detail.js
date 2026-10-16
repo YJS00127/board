@@ -39,6 +39,9 @@ function pwChk(type){
     if(type === 'delete'){
         fetch(`/api/board/`+id, {
             method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: pwInput
         })
             .then(response => response.json())
@@ -53,6 +56,9 @@ function pwChk(type){
     } else if(type === 'updatePwChk'){
         fetch(`/api/board/pw-chk/`+id, {
             method: "POST",
+            headers: {
+                'Content-Type': 'application.json'
+            },
             body: pwInput,
         })
             .then(response => response.json())

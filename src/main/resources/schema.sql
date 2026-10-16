@@ -13,12 +13,9 @@ CREATE TABLE IF NOT EXISTS file (
     board_id BIGINT,
     saved_name VARCHAR(200) NOT NULL,
     original_name VARCHAR(200) NOT NULL,
-    size BIGINT NOT NULL,
-    delete_yn BOOLEAN ,
-    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    deleted_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    size INT NOT NULL,
 
     FOREIGN KEY (board_id)
-    REFERENCES board_id
+    REFERENCES board(id)
     ON DELETE CASCADE
 );

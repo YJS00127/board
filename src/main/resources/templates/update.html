@@ -7,27 +7,26 @@
     <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
-<div  class="write-title">
+<div class="update-title">
     <h1>게시글 수정</h1><br>
 </div>
 <a class="a-btn" href="/board">목록</a>
-<div class="write-content">
+<div class="update-board">
     <div>
         <label for="title">제목</label>
         <input type="text" id="title" class="update-title"
                placeholder="제목을 입력해주세요.">
         <span id="error-msg-title" class="error"></span>
-    </div>
         <label for="writer">작성자</label>
         <input type="text" id="writer" class="update-writer"
                placeholder="작성자를 입력해주세요.">
         <span id="error-msg-writer" class="error"></span>
-    <div>
-        <label for="content">내용</label>
-        <textarea id="content" class="update-content"
-                  placeholder="내용을 입력해주세요."></textarea>
-        <span id="error-msg-content" class="error"></span>
     </div>
+    <label for="content">내용</label>
+    <textarea id="content" class="update-content"
+              placeholder="내용을 입력해주세요."></textarea>
+    <span id="error-msg-content" class="error"></span>
+    <input type="file" multiple>
 </div>
 <div>
     <a class ="a-btn" onclick=updateCancel()>취소</a>
