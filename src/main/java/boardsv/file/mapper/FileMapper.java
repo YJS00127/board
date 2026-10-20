@@ -1,13 +1,14 @@
 package boardsv.file.mapper;
 
-import boardsv.file.dto.FileCreateRequestDTO;
+import boardsv.file.dto.FileRequestDTO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface FileMapper {
-    void findFiles(@Param("files") FileCreateRequestDTO files,
-                   @Param("boardId") Long boardId);
 
-    void insertFiles(@Param("files") FileCreateRequestDTO files);
+    void insertAll(@Param("files") List<FileRequestDTO> files);
+
 }

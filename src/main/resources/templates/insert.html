@@ -7,29 +7,29 @@
     <link rel="Stylesheet" th:href="@{/css/board.css}">
 </head>
 <body>
-<div class="insert-title">
-    <h1>게시글 작성</h1>
+<div class="insert-board-title">
+    <h1>게시글 등록</h1>
 </div>
 <a class="a-btn" href="/board">목록</a>
 <form class="insert-board">
-        <div>
+        <div class="insert-writer-date">
             <label for="writer">작성자</label>
             <input type="text" id="writer" class="insert-writer"
                    placeholder="작성자를 입력하세요">
-            <label for="createdAt">등록일</label>
-            <p id="createdAt" class="insert-created-at"></p>
+            <p>등록일</p>
+            <span id="createdAt" class="insert-created-at"></span>
         </div>
-        <div>
+        <div class="insert-input-title">
             <label for="title">제목</label>
             <input type="text" id="title" class="insert-title"
                    placeholder="제목을 입력하세요">
         </div>
-        <div>
+        <div class="insert-input-content">
             <label for="content">내용</label>
             <textarea id="content" class="insert-content"
                       placeholder="내용을 입력하세요"></textarea>
         </div>
-        <div>
+        <div class="insert-pw-pwChk">
             <label for="pw">비밀번호</label>
             <input type="password" id="pw" class="insert-pw"
                    placeholder="비밀번호를 입력하세요">
@@ -38,8 +38,11 @@
                    placeholder="비밀번호를 한 번 더 입력하세요">
         </div>
         <div>
-            <label for="file">첨부파일</label>
-            <input type="file" id="file" class="insert-file" multiple>
+            <p>첨부파일</p>
+            <div class="file-upload">
+                <div class="file-list"></div>
+                <input type="file" id="file" class="insert-file" multiple>
+            </div>
         </div>
 </form><br>
 <button class ="a-btn" type="button" onclick=resetValue()>초기화</button>

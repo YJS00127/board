@@ -38,10 +38,12 @@ table {
 th, td {
     border: 1px solid black;
     padding: 5px 10px;
+    font-size: 16px;
+    font-family: inherit;
 }
 
 th {
-    background-color: lightgray;
+    background-color: #f4f5f6;
 }
 
 .boardNum {

@@ -3,13 +3,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="boardsv.file.mapper.FileMapper">
 
-    <select id="findFiles" resultType="boardsv.file.dto.FileCreateRequestDTO">
-        SELECT saved_name, original_name, size FROM file
-        WHERE board_id = #{boardId}
-    </select>
-
-    <insert id="insertFiles">
+<!--    파일 등록-->
+    <insert id="insertAll">
         INSERT INTO file (board_id, saved_name, original_name, size)
-        VALUES (#{files.boardId}, #{files.savedName}, #{files.originalName}, #{files.size})
+        VALUES
+        <foreach item="file" collection="files" separator=",">
+            (#{file.boardId}, #{file.savedName}, #{file.originalName}, #{file.size})
+        </foreach>
     </insert>
+
 </mapper>

@@ -1,7 +1,7 @@
 package boardsv.board.controller;
 
 import boardsv.board.dto.*;
-import boardsv.board.service.BoardService;
+import boardsv.board.service.BoardService;;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -11,14 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/board")
 public class BoardAPIController {
+
     private final BoardService boardService;
 
     @GetMapping
@@ -31,6 +29,7 @@ public class BoardAPIController {
     public ResponseEntity<BoardDetailResponseDTO> boardDetail(@PathVariable Long id,
                                                               HttpServletRequest request,
                                                               HttpServletResponse response){
+
         // 게시글 존재여부 확인
         BoardDetailResponseDTO boardDetailResponse = boardService.findBoardById(id);
 
@@ -41,16 +40,15 @@ public class BoardAPIController {
         // 조회수 및 쿠키 처리
         boardService.addViewCount(request, response, id);
 
-        // 조회수 증가한 response
+        // 조회수 처리된 상세 게시글
         boardDetailResponse = boardService.findBoardById(id);
 
         return ResponseEntity.ok(boardDetailResponse);
     }
 
     @PostMapping
-    public ResponseEntity<Integer> boardInsert(BoardCreateRequestDTO createBoardDTO,
-                                               @RequestPart("files") List<MultipartFile> files){
-        return ResponseEntity.ok(boardService.insertBoard(createBoardDTO, files));
+    public ResponseEntity<Integer> boardInsert(@Valid @ModelAttribute BoardCreateRequestDTO createBoardDTO){
+        return ResponseEntity.ok(boardService.insertBoard(createBoardDTO));
     }
 
     // 비밀번호 확인

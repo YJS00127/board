@@ -1,10 +1,11 @@
 package boardsv.file.service;
 
-import org.springframework.web.multipart.MultipartFile;
+import boardsv.file.dto.FileRequestDTO;
+import boardsv.file.dto.FileDetailResponseDTO;
+
+import java.util.List;
 
 public interface FileService {
-    String saveFile(MultipartFile file);
-
-//    File
+    void insertAll(Long boardId, List<FileRequestDTO> files);
 
 }

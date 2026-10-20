@@ -14,6 +14,8 @@ CREATE TABLE IF NOT EXISTS file (
     saved_name VARCHAR(200) NOT NULL,
     original_name VARCHAR(200) NOT NULL,
     size INT NOT NULL,
+--     db_yn TINYINT(1) NOT NULL,
+--     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
     FOREIGN KEY (board_id)
     REFERENCES board(id)
