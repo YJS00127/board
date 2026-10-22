@@ -85,8 +85,9 @@
 /* 파일 첨부 */
 .file-upload {
     display: flex;
-    width: 40%;
+    width: 100%
 }
+
 
 .file-list p {
     display: flex;
@@ -99,8 +100,23 @@
     font-size: 13px;
 }
 
+.file-list:has(.file-name) {
+    width: 30%;
+}
+
 .file-list button {
-    margin-left: 6px;
+    border-radius: 4px;
+    margin-left: auto;
+    background-color: white;
+    transition: background-color 0.2s ease;
+}
+
+.file-list p{
+}
+
+.file-list button:hover {
+    background-color: #cf1515;
+    color: white;
 }
 
 .file-list button:after {
@@ -113,6 +129,7 @@
     padding: 6px 0;
     margin-top: 5px;
     width: 70px;
+    height: 20px;
 }
 
 /* placeholder */
@@ -145,56 +162,73 @@
 /*    상세 게시글 CSS     */
 /************************/
 
-.boardDetail-title, .detail-board {
+/*상세 게시글*/
+.detail-board-title {
     margin-left: 15%;
 }
 
-/* 상세 테이블 */
+/* 게시글 정보 전체 */
 .detail-board {
     width: 70%;
     margin: 5% 0 20px 15%;
-    border-collapse: collapse;
     border-top: 2px solid #71869a;
-    font-size: 16px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 13px;
     font-family: inherit;
 }
 
-/* 셀 공통 */
-.detail-board th,
-.detail-board td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    height: 50px;
+/* 각 행 */
+.detail-board > div {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 50px;
+    border-bottom: 1px solid #ddd;
     box-sizing: border-box;
 }
 
-/* 라벨 */
-.detail-board th {
-    width: 15%;
+.detail-board p:not(.detail-file-name) {
+    display: flex;
+    align-items: center;
+    flex: 0 0 15%;
+    margin: 0;
+    padding: 12px;
     background-color: #f4f5f6;
-    text-align: left;
+    border-right: 1px solid #ddd;
+    box-sizing: border-box;
     font-weight: bold;
     color: #555;
 }
 
-/* 데이터 */
-.detail-board td {
-    width: 35%;
+/* 입력창 */
+.detail-board span{
+    flex: 1;
+    min-width: 0;
+    margin: 8px 10px;
+    padding: 9px;
     background-color: #fff;
-    color: #333;
-    overflow-wrap: anywhere;
 }
 
 /* 내용 */
-.detail-board .detail-content {
+.detail-content-row {
     height: 200px;
-    vertical-align: top;
-    line-height: 1.6;
+    resize: none;
 }
 
-/* 첨부파일 */
-.detail-files {
-    vertical-align: middle;
+.detail-file-list:has(.detail-file-name) {
+    align-items: center;
+    width: 100%;
+    margin: 8px 10px;
+    padding: 9px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.detail-file-name:hover {
+    text-decoration-line: underline;
 }
 
 
@@ -222,13 +256,12 @@
     display: flex;
     align-items: stretch;
     width: 100%;
-    min-height: 50px;
     border-bottom: 1px solid #ddd;
     box-sizing: border-box;
 }
 
 /* 라벨 */
-.update-board label {
+.update-board label, .update-file-row p:not(.update-file-name) {
     display: flex;
     align-items: center;
     flex: 0 0 15%;
@@ -243,10 +276,9 @@
 }
 
 /* 입력창 */
-.update-board input,
+.update-board input:not(.update-file),
 .update-board textarea {
     flex: 1;
-    min-width: 0;
     margin: 8px 10px;
     padding: 9px;
     border: 1px solid #ddd;
@@ -263,10 +295,33 @@
 }
 
 /* 첨부파일 */
+.update-file-row {
+    width: 100%;
+}
+
 .update-file {
+    margin-left: 5px;
     border: none;
     padding: 6px 0;
+    margin-top: 5px;
+    width: 70px;
+    height: 20px;
 }
+
+.update-file-list {
+    width: 30%;
+}
+
+.update-file-list p {
+    align-items: center;
+    margin: 8px 10px;
+    padding: 9px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+
 
 /* placeholder */
 .update-board input::placeholder,

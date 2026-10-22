@@ -18,28 +18,29 @@ function insertContents() {
     for(const file of files){
         formData.append("files", file);
     }
+    console.log(files)
 
-    fetch(`/api/board`, {
-        method: "POST",
-        body: formData
-    })
-        .then(async response => {
-            console.log(response)
-            const result = await response.json()
-            console.log(result)
-            if(!response.ok){
-                showErrorMsg(result)
-                return
-            }
-            return result;
-        })
-        .then(result => {
-            console.log(result)
-            if(result>0) {
-                alert('게시물을 등록하였습니다.')
-                location.href='/board'
-            }
-        })
+    // fetch(`/api/board`, {
+    //     method: "POST",
+    //     body: formData
+    // })
+    //     .then(async response => {
+    //         console.log(response)
+    //         const result = await response.json()
+    //         console.log(result)
+    //         if(!response.ok){
+    //             showErrorMsg(result)
+    //             return
+    //         }
+    //         return result;
+    //     })
+    //     .then(result => {
+    //         console.log(result)
+    //         if(result>0) {
+    //             alert('게시물을 등록하였습니다.')
+    //             location.href='/board'
+    //         }
+    //     })
 }
 
 // 에러 메세지 출력

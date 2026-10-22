@@ -38,46 +38,52 @@ table {
 th, td {
     border: 1px solid black;
     padding: 5px 10px;
-    font-size: 16px;
-    font-family: inherit;
+    font-size: 15px;
 }
 
 th {
     background-color: #f4f5f6;
 }
 
-.boardNum {
+/* 번호 */
+.list-number {
     text-align: center;
     width: 5%;
 }
 
-.boardWriter {
-    text-align: center;
-    width: 15%;
-}
-
-.created-day {
-    text-align: center;
-    width: 15%;
-}
-
-.created-time {
-    text-align: center;
-}
-
-.view-count {
-    text-align: center;
-    width: 10%;
-}
-/*상세 게시글 이동 css*/
-.boardTitle {
+/* 제목 */
+.list-title {
     text-decoration-line: none;
     width: 43%;
 }
 
-.boardTitle:hover {
+.list-title:hover {
     text-decoration-line: underline;
 }
+
+/* 작성자 */
+.list-writer {
+    text-align: center;
+    width: 15%;
+}
+
+/* 조회수 */
+.list-view-count {
+    text-align: center;
+    width: 10%;
+}
+
+/* 등록일 */
+.list-created-day {
+    text-align: center;
+    width: 15%;
+}
+
+/* 등록시간 */
+.list-created-time {
+    text-align: center;
+}
+
 
 
 /* 페이징 css */

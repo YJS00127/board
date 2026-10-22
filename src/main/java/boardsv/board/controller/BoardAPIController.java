@@ -29,10 +29,10 @@ public class BoardAPIController {
     public ResponseEntity<BoardDetailResponseDTO> boardDetail(@PathVariable Long id,
                                                               HttpServletRequest request,
                                                               HttpServletResponse response){
-
         // 게시글 존재여부 확인
         BoardDetailResponseDTO boardDetailResponse = boardService.findBoardById(id);
 
+        // 게시글 없을 시 404 not found 반환
         if(boardDetailResponse == null){
             return ResponseEntity.notFound().build();
         }

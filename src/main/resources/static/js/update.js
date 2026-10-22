@@ -13,20 +13,30 @@ function boardContentOutput(id) {
             title.value = boardDetail.title
             writer.value = boardDetail.writer
             content.value = boardDetail.content
+            console.log(boardDetail.files)
+            showFiles(boardDetail.files)
         })
 }
 
 // 게시글 데이터 수정
 const updateContent = () => {
+    const formData = new FormData();
+
     const title = document.getElementById("title").value
     const writer = document.getElementById('writer').value
     const content = document.getElementById('content').value
+    const files = document.querySelector(".update-file").files
+    console.log(files)
+
+
+    formData.append("title", title);
+    formData.append("writer", writer);
+    formData.append("content", content);
+    formData.append("files", files);
+
 
     fetch(`/api/board/`+id, {
         method: "PUT",
-        headers: {
-            'Content-Type' : 'application/json'
-        },
         body: JSON.stringify({
             title,
             writer,
@@ -44,7 +54,7 @@ const updateContent = () => {
         .then(result => {
             if(result>0){
                 alert('게시글을 수정하였습니다.');
-                location.href=`/board/detail/`+id;
+                // location.href=`/board/detail/`+id;
             }
         })
 }
@@ -68,9 +78,17 @@ function showErrorMsg(errorMessage){
             contentError.textContent = errorMessage["content"];
         }
 }
-
+const updateConten = () => {
+}
 const updateCancel = () => {
     location.href=`/board/detail/`+id;
+}
+
+function showFiles(files){
+    const fileList = document.querySelector(".update-file-list")
+    for(const file of files){
+        fileList.innerHTML += `<p class="update-file-name">${file.originalName}</p>`;
+    }
 }
 
 boardContentOutput(id)

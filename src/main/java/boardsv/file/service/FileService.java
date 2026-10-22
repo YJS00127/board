@@ -8,4 +8,5 @@ import java.util.List;
 public interface FileService {
     void insertAll(Long boardId, List<FileRequestDTO> files);
 
+    List<FileDetailResponseDTO> findFileByBoardId(Long boardId);
 }

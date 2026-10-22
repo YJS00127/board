@@ -1,5 +1,10 @@
 package boardsv.file.dto;
 
+import lombok.Getter;
+import lombok.ToString;
+
+@Getter
+@ToString
 public class FileDetailResponseDTO {
     private Long id;
     private Long boardId;
@@ -7,5 +12,4 @@ public class FileDetailResponseDTO {
     private String savedName;
     private Long size;
     private Boolean dbYn;
-
 }

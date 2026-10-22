@@ -12,7 +12,7 @@
 </div>
 <a class="a-btn" href="/board">목록</a>
 <div class="update-board">
-    <div class="update-title-writer">
+    <div class="update-title-writer-row">
         <label for="title">제목</label>
         <input type="text" id="title" class="update-title"
                placeholder="제목을 입력해주세요.">
@@ -20,14 +20,15 @@
         <input type="text" id="writer" class="update-writer"
                placeholder="작성자를 입력해주세요.">
     </div>
-    <div>
+    <div class="update-content-row">
         <label for="content">내용</label>
         <textarea id="content" class="update-content"
                   placeholder="내용을 입력해주세요."></textarea>
     </div>
-    <div>
-        <label for="update-file">첨부파일</label>
-        <input type="file" id="update-file" multiple>
+    <div class="update-file-row">
+        <p>첨부파일</p>
+        <div class="update-file-list"></div>
+        <input type="file" class="update-file" onchange="" multiple>
     </div>
 </div>
 <div>

@@ -18,11 +18,13 @@ function boardDetailOutput() {
             return response.json();
         })
         .then(data => {
+            console.log(data);
             title.textContent = data.title;
             writer.textContent = data.writer;
             content.textContent = data.content;
             viewCount.textContent = data.viewCount;
             createdAt.textContent = data.createdAt.slice(0,16);
+            showFiles(data.files);
         })
 }
 
@@ -57,12 +59,13 @@ function pwChk(type){
         fetch(`/api/board/pw-chk/`+id, {
             method: "POST",
             headers: {
-                'Content-Type': 'application.json'
+                'Content-Type': 'application/json'
             },
             body: pwInput,
         })
             .then(response => response.json())
             .then(result => {
+                console.log(result)
                 if(result){
                     alert("비밀번호가 일치합니다. 수정 화면으로 이동합니다.")
                     location.href = `/board/update/` + id
@@ -73,4 +76,10 @@ function pwChk(type){
     }
 }
 
+function showFiles(files){
+    const fileList = document.querySelector(".detail-file-list")
+    for(const file of files){
+        fileList.innerHTML += `<p class="detail-file-name">${file.originalName}</p>`;
+    }
+}
 boardDetailOutput()

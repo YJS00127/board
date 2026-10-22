@@ -42,7 +42,7 @@
         WHERE id = #{id}
     </select>
 
-    <select id="findBoardPw" resultType="String">
+    <select id="findBoardPw">
         SELECT pw
         FROM board
         WHERE id= #{id}

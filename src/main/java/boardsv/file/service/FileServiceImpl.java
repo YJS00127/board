@@ -28,4 +28,8 @@ public class FileServiceImpl implements FileService{
         fileMapper.insertAll(files);
     }
 
+    @Override
+    public List<FileDetailResponseDTO> findFileByBoardId(Long boardId){
+        return fileMapper.findFileByBoardId(boardId);
+    }
 }

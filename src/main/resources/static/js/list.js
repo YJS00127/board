@@ -59,14 +59,14 @@ function boardListOutPut(offset) {
         const tr = document.createElement('tr');
         boardNumber += 1;
         tr.innerHTML =
-            `<td class="boardNum">${boardNumber}</td>` +
-            `<td class="boardTitle">
+            `<td class="list-number">${boardNumber}</td>` +
+            `<td class="list-title">
                 <a href="/board/detail/${boardDetailData.id}">${boardDetailData.title}</a>
             </td>` +
-            `<td class="boardWriter">${boardDetailData.writer}</td>` +
-            `<td class="view-count">${boardDetailData.viewCount}</td>` +
-            `<td class="created-day">${boardDetailData.createdAt.slice(0,10)}</td>` +
-            `<td class="created-time">${boardDetailData.createdAt.slice(11,16)}</td>`;
+            `<td class="list-writer">${boardDetailData.writer}</td>` +
+            `<td class="list-view-count">${boardDetailData.viewCount}</td>` +
+            `<td class="list-created-day">${boardDetailData.createdAt.slice(0,10)}</td>` +
+            `<td class="list-created-time">${boardDetailData.createdAt.slice(11,16)}</td>`;
         document.querySelector("tbody").append(tr);
     })
 }

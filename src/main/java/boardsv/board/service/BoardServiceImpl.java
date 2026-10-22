@@ -36,7 +36,10 @@ class BoardServiceImpl implements BoardService {
 
     @Override
     public BoardDetailResponseDTO findBoardById(Long id) {
-        return boardMapper.findBoardById(id);
+        BoardDetailResponseDTO board = new BoardDetailResponseDTO();
+        board = boardMapper.findBoardById(id);
+        board.setFiles(fileService.findFileByBoardId(id));
+        return board;
     }
 
     // 조회수 증가 및 쿠키 처리
@@ -69,7 +72,7 @@ class BoardServiceImpl implements BoardService {
 
             Cookie newCookie = new Cookie("LookedUpBoard", "[" + id + "]");
             newCookie.setPath("/");
-            newCookie.setMaxAge(60 * 5);
+            newCookie.setMaxAge(60 * 10);
             response.addCookie(newCookie);
         }
     }
